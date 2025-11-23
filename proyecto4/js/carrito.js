@@ -19,7 +19,7 @@ import {Carrito} from './ClaseCarrito.js'
     parrafo.textContent=numCarrito;
 
     //pintar el contenido del carrito
-    carrito.products.products.forEach(producto=>{
+    carrito.products.forEach(producto=>{
       div.innerHTML+=`
                     <p>SKU: ${producto.SKU}</p>
                     <h1>${producto.title}</h1>

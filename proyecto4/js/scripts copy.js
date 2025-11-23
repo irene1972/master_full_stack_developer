@@ -6,37 +6,30 @@ import {Carrito} from './ClaseCarrito.js'
     const seccionOferta=document.querySelector('section.oferta');
     const seccionProductos=document.querySelector('section.productos');
 
-    /*
+    
     let productos='{"currency": "€","products": [{"SKU": "0K3QOSOV4V","title": "iFhone 13 Pro","price": "938.99","qty":"1"},{"SKU": "TGD5XORY1L","title": "Cargador","price": "49.99","qty":"1"},{"SKU": "IOKW9BQ9F3","title": "Funda de piel","price": "79.99","qty":"1"},{"SKU": "GJH765JL9I","title": "Base de carga inalámbrica","price": "85.23","qty":"1"},{"SKU": "LER971GH3P","title": "Pantalla plana 10 pulgadas","price": "105.72","qty":"1"}]}';
     let productosObj=JSON.parse(productos);
-    */
-    let productosObj;
-    let carrito;
+    
+    let productos2;
+    let productosObj2;
 
     const url='http://localhost:3000/products';
     fetch(url)
         .then(response=>response.json())
         .then(data=>{
-            productosObj=data;
-            let carrito=new Carrito(productosObj);
-            //let totalCarrito={};
-            
-            //Se guardan los productos en local-storage para poder recuperarlos y pintarlos
-            localStorage.setItem('productosAGoodShop', JSON.stringify(productosObj));
-            
+            productos2=data;
+            //productosObj2=JSON.parse(productos2);
+            console.log(productos2);
         })
         .catch(error=>console.log(error));
-    
+
+    console.log(productos2);
+
+    let carrito=new Carrito(productosObj);
+    //let totalCarrito={};
+
     document.addEventListener('DOMContentLoaded',inicializarDom);
-
-    function inicializarDom(e){
-        
-        //obtener los productos del local storage
-        const productosString = localStorage.getItem('productosAGoodShop');
-        const productosObj=JSON.parse(productosString);
-
-        //pintar el número de elementos que contiene el carrito
-        carrito=new Carrito(productosObj.products);
+    function inicializarDom(){
         
         //actualiza en el DOM el número de elementos del carrito
         const numCarrito=carrito.obtenerCarrito()[1];
@@ -82,7 +75,8 @@ import {Carrito} from './ClaseCarrito.js'
 
         //Add evento en cart para que se guarde la variable carrito en local-storage
         localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
-}    
+    }
+
     function actualizarCarrito(event){
         /*
         let carrito=new Carrito(productosObj.products.filter(producto=>producto.SKU===event.target.id));
@@ -115,5 +109,5 @@ import {Carrito} from './ClaseCarrito.js'
         
 
     }
-  
+
 })()
