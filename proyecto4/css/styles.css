@@ -157,6 +157,15 @@ span.capacidad{
   width: 3rem;
   text-align: center;
 }
+.exito{
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  padding: 1rem;
+}
+.total{
+  background-color: beige;
+}
 @media (min-width: 768px) {
       .layout {
         display:grid;
@@ -170,7 +179,8 @@ span.capacidad{
       .header{
         grid-area: header;
 
-        display: flex;
+        display:flex;
+        /*position: fixed;*/
       }
       .main{
         grid-area: main;
