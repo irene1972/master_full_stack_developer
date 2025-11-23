@@ -1,0 +1,6 @@
+OBJETIVOS:
+1. Mejorar mis hablidadades como programador
+
+2. Mejorar mis conocimientos de JS
+
+3. Aprender Angular

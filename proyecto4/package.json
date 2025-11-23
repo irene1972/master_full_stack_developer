@@ -1,0 +1,15 @@
+{
+  "name": "agoodshop",
+  "version": "1.0.0",
+  "description": "Proyecto de una tienda con javascript",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Irene Olmos Gómez",
+  "license": "ISC",
+  "dependencies": {
+    "fs-promise": "^2.0.3"
+  }
+}
