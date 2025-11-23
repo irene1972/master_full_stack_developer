@@ -3,47 +3,24 @@ import {Carrito} from './ClaseCarrito.js'
 (()=>{
 
     const parrafo=document.querySelector('.contenedor-carrito p');
+    const seccionOferta=document.querySelector('section.oferta');
+    const seccionProductos=document.querySelector('section.productos');
 
     let productos='{"currency": "€","products": [{"SKU": "0K3QOSOV4V","title": "iFhone 13 Pro","price": "938.99","qty":"1"},{"SKU": "TGD5XORY1L","title": "Cargador","price": "49.99","qty":"1"},{"SKU": "IOKW9BQ9F3","title": "Funda de piel","price": "79.99","qty":"1"},{"SKU": "GJH765JL9I","title": "Base de carga inalámbrica","price": "85.23","qty":"1"},{"SKU": "LER971GH3P","title": "Pantalla plana 10 pulgadas","price": "105.72","qty":"1"}]}';
     let productosObj=JSON.parse(productos);
-    //console.log(productosObj);
 
-    /*
-    class Carrito{
-        constructor(productos){
-            this.products=productos;
-        }
-        actualizaUnidades(sku,unidades){
-            const prod=this.products.products.forEach(producto=>{
-                if(producto.SKU===sku){
-                    producto.qty=parseInt(unidades)+parseInt(producto.qty);
-                }
-            });
-
-        }
-        obtenerInformacionProducto(sku){
-            const info=this.products.filter(producto=>producto.SKU===sku);
-            return info;
-        }
-        
-        obtenerCarrito(){
-            const total=this.products.products.reduce((acc,producto)=>acc+parseInt(producto.qty),0);
-            const arrayCarrito=[this.products,total];
-            return arrayCarrito;
-        }
-        
-    }
-    */
     let carrito=new Carrito(productosObj);
+    //let totalCarrito={};
 
     document.addEventListener('DOMContentLoaded',inicializarDom);
     function inicializarDom(){
         
         //actualiza en el DOM el número de elementos del carrito
         const numCarrito=carrito.obtenerCarrito()[1];
+        //const numCarrito=0;
         parrafo.textContent=numCarrito;
 
-        //inicializar el DOM del index.html
+        //inicializar el DOM de index.html con los productos de JSON
         const botones=document.querySelectorAll('.boton-prod');
         botones[0].addEventListener('click',actualizarCarrito);
         botones[1].addEventListener('click',actualizarCarrito);
@@ -85,19 +62,36 @@ import {Carrito} from './ClaseCarrito.js'
     }
 
     function actualizarCarrito(event){
+        /*
+        let carrito=new Carrito(productosObj.products.filter(producto=>producto.SKU===event.target.id));
+        console.log(carrito);
+        totalCarrito={...totalCarrito,...carrito.products}
+        */
+        
         const seccion=event.target.parentNode;
         carrito.actualizaUnidades(event.target.id,seccion.querySelector('input[type="number"]').value);
         localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
         const numCarrito=carrito.obtenerCarrito()[1];
         parrafo.textContent=numCarrito;
+
+        //Mensaje de éxito si ya existe previamente lo elimina
+        if(document.querySelector('p.exito')){
+            document.querySelector('p.exito').remove();
+        }
+
+        //Crea el párrafo con el mensaje de éxito
+        const parrafoExito=document.createElement('P');
+        parrafoExito.textContent='Se ha añadido el/los produto/s al carrito';
+        parrafoExito.classList.add('exito');
+        window.scrollTo(0, 0);
+        seccionOferta.prepend(parrafoExito);
+
+        //A los tres segundos elimina el mensaje de éxito
+        setTimeout(()=>{
+            parrafoExito.remove();
+        },3000);
+        
+
     }
-    //let carrito=new Carrito(productosObj);
-    //console.log(carrito);
-    //carrito.actualizaUnidades('TGD5XORY1L',3);
-    //console.log(carrito);
-    //let producto=carrito.obtenerInformacionProducto('TGD5XORY1L');
-    //console.log(producto);
-    //const totalCarrito=carrito.obtenerCarrito();
-    //console.log(totalCarrito);
 
 })()
