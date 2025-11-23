@@ -2,10 +2,21 @@ export class Carrito{
         constructor(productos){
             this.products=productos;
         }
+        existeProducto(sku){
+            this.products.find(producto=>producto.SKU===sku);
+        }
         actualizaUnidades(sku,unidades){
-            const prod=this.products.forEach(producto=>{
+            this.products.forEach(producto=>{
                 if(producto.SKU===sku){
                     producto.qty=parseInt(unidades)+parseInt(producto.qty);
+                }
+            });
+
+        }
+        actualizaUnidadesPorPrimeraVez(sku,unidades){
+            this.products.forEach(producto=>{
+                if(producto.SKU===sku){
+                    producto.qty=parseInt(unidades);
                 }
             });
 

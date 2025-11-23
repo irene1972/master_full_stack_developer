@@ -11,22 +11,10 @@ import {Carrito} from './ClaseCarrito.js'
     fetch(url)
         .then(response=>response.json())
         .then(data=>{
-            
-            //creo un carrito con los cinco productos que tengo en la api
-            carrito=new Carrito(data.products);
-            
-            //lo guardo en local-storage
-            localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
-
-            //actualiza en el DOM el número de elementos del carrito
-            const numCarrito=carrito.obtenerCarrito()[1];
-            //const numCarrito=0;
-            parrafo.textContent=numCarrito;
+            //carrito=new Carrito(data);
             
             //Se guardan los productos en local-storage para poder recuperarlos y pintarlos
             localStorage.setItem('productosAGoodShop', JSON.stringify(data));
-
-            
             
         })
         .catch(error=>console.log(error));
@@ -38,6 +26,18 @@ import {Carrito} from './ClaseCarrito.js'
     let productosObj=JSON.parse(productosString);
     
     function inicializarDom(e){
+
+        //pintar el número de elementos que contiene el carrito
+        carrito=new Carrito(productosObj.products);
+
+        //actualiza en el DOM el número de elementos del carrito
+        const numCarrito=carrito.obtenerCarrito()[1];
+        //const numCarrito=0;
+        parrafo.textContent=numCarrito;
+
+        //Se guarda la variable carrito en local-storage
+        localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+
         //inicializar el DOM de index.html con los productos de JSON que he guardado en local-storage
         const botones=document.querySelectorAll('.boton-prod');
         botones[0].addEventListener('click',actualizarCarrito);
@@ -74,6 +74,7 @@ import {Carrito} from './ClaseCarrito.js'
         precios[1].textContent=productosObj.products[2].price + productosObj.currency;
         precios[2].textContent=productosObj.products[3].price + productosObj.currency;
         precios[3].textContent=productosObj.products[4].price + productosObj.currency;
+
         
 }    
     function actualizarCarrito(event){
@@ -84,6 +85,9 @@ import {Carrito} from './ClaseCarrito.js'
         */
 
         const seccion=event.target.parentNode;
+        console.log(carrito);
+        console.log(event.target.id);
+        console.log(seccion.querySelector('input[type="number"]').value);
         carrito.actualizaUnidades(event.target.id,seccion.querySelector('input[type="number"]').value);
         localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
         const numCarrito=carrito.obtenerCarrito()[1];
