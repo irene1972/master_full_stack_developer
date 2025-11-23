@@ -14,7 +14,7 @@ import {Carrito} from './ClaseCarrito.js'
 
     //pintar el número de elementos que contiene el carrito
     const carrito=new Carrito(carritoObj.products);
-    console.log(carrito);
+    
     const numCarrito=carrito.obtenerCarrito()[1];
     parrafo.textContent=numCarrito;
 
@@ -25,9 +25,12 @@ import {Carrito} from './ClaseCarrito.js'
                     <h1>${producto.title}</h1>
                     <p>Precio: ${producto.price}${carrito.products.currency}</p>
                     <p class="cantidad">Cantidad: ${producto.qty}</p>
-
                     `;
     });
+    div.innerHTML+=`
+                    <h2 class="total">CANTIDAD TOTAL DE PRODUCTOS: ${carrito.obtenerCarrito()[1]}</h2">
+                    <h2 class="total">CANTIDAD A PAGAR: ${carrito.obtenerCarrito()[2]} €</h2>
+                  `;
     document.appendChild(div);
   }
         
