@@ -6,7 +6,7 @@ import {Carrito} from './ClaseCarrito.js'
     const seccionOferta=document.querySelector('section.oferta');
 
     let carrito;
-    
+
     const url='http://localhost:3000/products';
     fetch(url)
         .then(response=>response.json())
@@ -21,9 +21,6 @@ import {Carrito} from './ClaseCarrito.js'
             //actualiza en el DOM el número de elementos del carrito
             const numCarrito=carrito.obtenerCarrito()[1];
             parrafo.textContent=numCarrito;
-            
-            //Se guardan los productos en local-storage para poder recuperarlos y pintarlos
-            localStorage.setItem('productosAGoodShop', JSON.stringify(data));
 
             const botones=document.querySelectorAll('.boton-prod');
             botones[0].addEventListener('click',actualizarCarrito);
