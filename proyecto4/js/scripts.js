@@ -4,38 +4,28 @@ import {Carrito} from './ClaseCarrito.js'
 
     const parrafo=document.querySelector('.contenedor-carrito p');
     const seccionOferta=document.querySelector('section.oferta');
-    const seccionProductos=document.querySelector('section.productos');
 
-    let productosString = localStorage.getItem('productosAGoodShop');
-    let productosObj=JSON.parse(productosString);
-
-    /*
-    let productos='{"currency": "€","products": [{"SKU": "0K3QOSOV4V","title": "iFhone 13 Pro","price": "938.99","qty":"1"},{"SKU": "TGD5XORY1L","title": "Cargador","price": "49.99","qty":"1"},{"SKU": "IOKW9BQ9F3","title": "Funda de piel","price": "79.99","qty":"1"},{"SKU": "GJH765JL9I","title": "Base de carga inalámbrica","price": "85.23","qty":"1"},{"SKU": "LER971GH3P","title": "Pantalla plana 10 pulgadas","price": "105.72","qty":"1"}]}';
-    let productosObj=JSON.parse(productos);
-    */
     let carrito;
 
     const url='http://localhost:3000/products';
     fetch(url)
         .then(response=>response.json())
         .then(data=>{
-            productosObj=data;
-            carrito=new Carrito(productosObj);
-            //let totalCarrito={};
+            //carrito=new Carrito(data);
             
             //Se guardan los productos en local-storage para poder recuperarlos y pintarlos
-            localStorage.setItem('productosAGoodShop', JSON.stringify(productosObj));
+            localStorage.setItem('productosAGoodShop', JSON.stringify(data));
             
         })
         .catch(error=>console.log(error));
     
     document.addEventListener('DOMContentLoaded',inicializarDom);
+
+    //obtener los productos del local storage
+    let productosString = localStorage.getItem('productosAGoodShop');
+    let productosObj=JSON.parse(productosString);
     
     function inicializarDom(e){
-        
-        //obtener los productos del local storage
-        const productosString = localStorage.getItem('productosAGoodShop');
-        const productosObj=JSON.parse(productosString);
 
         //pintar el número de elementos que contiene el carrito
         carrito=new Carrito(productosObj.products);
@@ -45,7 +35,10 @@ import {Carrito} from './ClaseCarrito.js'
         //const numCarrito=0;
         parrafo.textContent=numCarrito;
 
-        //inicializar el DOM de index.html con los productos de JSON
+        //Se guarda la variable carrito en local-storage
+        localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+
+        //inicializar el DOM de index.html con los productos de JSON que he guardado en local-storage
         const botones=document.querySelectorAll('.boton-prod');
         botones[0].addEventListener('click',actualizarCarrito);
         botones[1].addEventListener('click',actualizarCarrito);
@@ -82,8 +75,7 @@ import {Carrito} from './ClaseCarrito.js'
         precios[2].textContent=productosObj.products[3].price + productosObj.currency;
         precios[3].textContent=productosObj.products[4].price + productosObj.currency;
 
-        //Add evento en cart para que se guarde la variable carrito en local-storage
-        localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+        
 }    
     function actualizarCarrito(event){
         /*
@@ -96,9 +88,9 @@ import {Carrito} from './ClaseCarrito.js'
         console.log(carrito);
         console.log(event.target.id);
         console.log(seccion.querySelector('input[type="number"]').value);
-        carrito.actualizaUnidades2(event.target.id,seccion.querySelector('input[type="number"]').value);
+        carrito.actualizaUnidades(event.target.id,seccion.querySelector('input[type="number"]').value);
         localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
-        const numCarrito=carrito.obtenerCarrito2()[1];
+        const numCarrito=carrito.obtenerCarrito()[1];
         parrafo.textContent=numCarrito;
 
         //Mensaje de éxito si ya existe previamente lo elimina

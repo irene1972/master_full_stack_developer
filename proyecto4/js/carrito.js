@@ -16,24 +16,11 @@ import {Carrito} from './ClaseCarrito.js'
     
     const carrito=new Carrito(carritoObj.products);
     
-    try {
-      parrafo.textContent=carrito.products.lenth;
-    } catch (error) {
-      parrafo.textContent=carrito.products.products.lenth;
-    }
+    parrafo.textContent=carrito.products.lenth;
 
-    /*
-    try {
-      let numProductos=carrito.obtenerCarrito()[1];
-      let totalPagar=carrito.obtenerCarrito()[2];
-    } catch (error) {
-      let numProductos=carrito.obtenerCarrito2()[1];
-      let totalPagar=carrito.obtenerCarrito2()[2];
-    }
-    */
     //pintar el contenido del carrito
-    try {
-      carrito.products.forEach(producto=>{
+    
+    carrito.products.forEach(producto=>{
       div.innerHTML+=`
                     <p>SKU: ${producto.SKU}</p>
                     <h1>${producto.title}</h1>
@@ -41,19 +28,10 @@ import {Carrito} from './ClaseCarrito.js'
                     <p class="cantidad">Cantidad: ${producto.qty}</p>
                     `;
     });
-    } catch (error) {
-      carrito.products.products.forEach(producto=>{
-      div.innerHTML+=`
-                    <p>SKU: ${producto.SKU}</p>
-                    <h1>${producto.title}</h1>
-                    <p>Precio: ${producto.price} €</p>
-                    <p class="cantidad">Cantidad: ${producto.qty}</p>
-                    `;
-    });
-    }
+    
 
-    let prods=carrito.obtenerCarrito2()[1];
-    let total=carrito.obtenerCarrito2()[2];
+    let prods=carrito.obtenerCarrito()[1];
+    let total=carrito.obtenerCarrito()[2].toFixed(2);
     
     div.innerHTML+=`
                     <h2 class="total">CANTIDAD TOTAL DE PRODUCTOS: ${prods}</h2">
