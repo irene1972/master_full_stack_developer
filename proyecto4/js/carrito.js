@@ -13,23 +13,51 @@ import {Carrito} from './ClaseCarrito.js'
     const carritoObj=JSON.parse(carritoString);
 
     //pintar el número de elementos que contiene el carrito
+    
     const carrito=new Carrito(carritoObj.products);
     
-    const numCarrito=carrito.obtenerCarrito()[1];
-    parrafo.textContent=numCarrito;
+    try {
+      parrafo.textContent=carrito.products.lenth;
+    } catch (error) {
+      parrafo.textContent=carrito.products.products.lenth;
+    }
 
+    /*
+    try {
+      let numProductos=carrito.obtenerCarrito()[1];
+      let totalPagar=carrito.obtenerCarrito()[2];
+    } catch (error) {
+      let numProductos=carrito.obtenerCarrito2()[1];
+      let totalPagar=carrito.obtenerCarrito2()[2];
+    }
+    */
     //pintar el contenido del carrito
-    carrito.products.forEach(producto=>{
+    try {
+      carrito.products.forEach(producto=>{
       div.innerHTML+=`
                     <p>SKU: ${producto.SKU}</p>
                     <h1>${producto.title}</h1>
-                    <p>Precio: ${producto.price}${carrito.products.currency}</p>
+                    <p>Precio: ${producto.price} €</p>
                     <p class="cantidad">Cantidad: ${producto.qty}</p>
                     `;
     });
+    } catch (error) {
+      carrito.products.products.forEach(producto=>{
+      div.innerHTML+=`
+                    <p>SKU: ${producto.SKU}</p>
+                    <h1>${producto.title}</h1>
+                    <p>Precio: ${producto.price} €</p>
+                    <p class="cantidad">Cantidad: ${producto.qty}</p>
+                    `;
+    });
+    }
+
+    let prods=carrito.obtenerCarrito2()[1];
+    let total=carrito.obtenerCarrito2()[2];
+    
     div.innerHTML+=`
-                    <h2 class="total">CANTIDAD TOTAL DE PRODUCTOS: ${carrito.obtenerCarrito()[1]}</h2">
-                    <h2 class="total">CANTIDAD A PAGAR: ${carrito.obtenerCarrito()[2]} €</h2>
+                    <h2 class="total">CANTIDAD TOTAL DE PRODUCTOS: ${prods}</h2">
+                    <h2 class="total">CANTIDAD A PAGAR: ${total} €</h2>
                   `;
     document.appendChild(div);
   }
