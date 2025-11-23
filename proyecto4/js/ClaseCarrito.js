@@ -16,8 +16,9 @@ export class Carrito{
         }
         
         obtenerCarrito(){
-            const total=this.products.products.reduce((acc,producto)=>acc+parseInt(producto.qty),0);
-            const arrayCarrito=[this.products,total];
+            const totalQty=this.products.products.reduce((acc,producto)=>acc+parseInt(producto.qty),0);
+            const totalEuros=this.products.products.reduce((acc,producto)=>acc+parseInt(producto.price),0);
+            const arrayCarrito=[this.products,totalQty,totalEuros];
             return arrayCarrito;
         }
         
