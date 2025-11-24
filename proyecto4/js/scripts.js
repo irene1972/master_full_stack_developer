@@ -6,26 +6,39 @@ import {Carrito} from './ClaseCarrito.js'
     const seccionOferta=document.querySelector('section.oferta');
 
     let carrito;
+    let productos;
 
     document.addEventListener('DOMContentLoaded',pintarHtml);
 
     function pintarHtml(){
         
     const url='http://localhost:3000/products';
-    
+
     fetch(url)
         .then(response=>response.json())
         .then(data=>{
-            
+            productos=data;
             //creo un carrito con los cinco productos que tengo en la api
-            carrito=new Carrito(data.products);
+            //carrito=new Carrito(data.products);
             
             //lo guardo en local-storage
-            localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+            //localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
 
             //actualiza en el DOM el número de elementos del carrito
-            const numCarrito=carrito.obtenerCarrito()[1];
-            parrafo.textContent=numCarrito;
+            //const numCarrito=carrito.obtenerCarrito()[1];
+            
+
+            if(localStorage.getItem('carritoAGoodShop')===null || localStorage.getItem('carritoAGoodShop')===undefined){
+                const numCarrito=0
+                parrafo.textContent=numCarrito;
+                carrito=new Carrito();
+            }else{
+                const carritoString = localStorage.getItem('carritoAGoodShop');
+                const carritoObj=JSON.parse(carritoString);
+                carrito=new Carrito(carritoObj.products);
+                const numCarrito=carrito.obtenerCarrito()[1];
+                parrafo.textContent=numCarrito;
+            }
 
             const botones=document.querySelectorAll('.boton-prod');
             botones[0].addEventListener('click',actualizarCarrito);
@@ -67,19 +80,41 @@ import {Carrito} from './ClaseCarrito.js'
         .catch(error=>console.log(error));
     }
      
-    function actualizarCarrito(event){
-        /*
-        let carrito=new Carrito(productosObj.products.filter(producto=>producto.SKU===event.target.id));
-        console.log(carrito);
-        totalCarrito={...totalCarrito,...carrito.products}
-        */
-
+    function actualizarCarrito(event){     
         const seccion=event.target.parentNode;
-        carrito.actualizaUnidades(event.target.id,seccion.querySelector('input[type="number"]').value);
-        localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+        let idProd=event.target.id;
+        const producto=carrito.existeProducto(idProd);
+        let cantidad=seccion.querySelector('input[type="number"]').value;
+        
+        if(producto){
+            //si ya existe el producto en el carrito solo hemos de actualizar
+            carrito.actualizaUnidades(idProd,cantidad);
+            localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+        }else{
+            //si no existe el producto en el carrito lo introducimos
+            const producto=productos.products.filter(producto=>producto.SKU===idProd)
+            
+            let products=[...carrito.products,...producto];
+
+            carrito=new Carrito(products);
+            //lo guardo en local-storage
+            localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+
+            if(cantidad>1){
+                carrito.actualizaUnidades(idProd,cantidad-1);
+                //lo guardo en local-storage
+                localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+            }  
+        }
+
         const numCarrito=carrito.obtenerCarrito()[1];
         parrafo.textContent=numCarrito;
 
+        mensajeDeExito('Se ha añadido el/los produto/s al carrito');
+        
+
+    }
+    function mensajeDeExito(mensaje){
         //Mensaje de éxito si ya existe previamente lo elimina
         if(document.querySelector('p.exito')){
             document.querySelector('p.exito').remove();
@@ -87,7 +122,7 @@ import {Carrito} from './ClaseCarrito.js'
 
         //Crea el párrafo con el mensaje de éxito
         const parrafoExito=document.createElement('P');
-        parrafoExito.textContent='Se ha añadido el/los produto/s al carrito';
+        parrafoExito.textContent=mensaje;
         parrafoExito.classList.add('exito');
         window.scrollTo(0, 0);
         seccionOferta.prepend(parrafoExito);
@@ -96,8 +131,6 @@ import {Carrito} from './ClaseCarrito.js'
         setTimeout(()=>{
             parrafoExito.remove();
         },3000);
-        
-
     }
   
 })()

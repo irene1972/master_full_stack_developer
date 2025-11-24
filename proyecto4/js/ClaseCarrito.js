@@ -1,9 +1,9 @@
 export class Carrito{
-        constructor(productos){
+        constructor(productos=[]){
             this.products=productos;
         }
         existeProducto(sku){
-            this.products.find(producto=>producto.SKU===sku);
+            return this.products.find(producto=>producto.SKU===sku);
         }
         actualizaUnidades(sku,unidades){
             this.products.forEach(producto=>{
