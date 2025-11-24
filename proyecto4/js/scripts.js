@@ -7,7 +7,12 @@ import {Carrito} from './ClaseCarrito.js'
 
     let carrito;
 
+    document.addEventListener('DOMContentLoaded',pintarHtml);
+
+    function pintarHtml(){
+        
     const url='http://localhost:3000/products';
+    
     fetch(url)
         .then(response=>response.json())
         .then(data=>{
@@ -60,6 +65,7 @@ import {Carrito} from './ClaseCarrito.js'
             
         })
         .catch(error=>console.log(error));
+    }
      
     function actualizarCarrito(event){
         /*
