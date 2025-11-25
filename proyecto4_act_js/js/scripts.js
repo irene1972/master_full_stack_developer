@@ -89,23 +89,26 @@ import {Carrito} from './ClaseCarrito.js'
         if(producto){
             //si ya existe el producto en el carrito solo hemos de actualizar
             carrito.actualizaUnidades(idProd,cantidad);
-            localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+
         }else{
             //si no existe el producto en el carrito lo introducimos
-            const producto=productos.products.filter(producto=>producto.SKU===idProd)
-            
+
+            //primero extraemos los datos del producto escogido
+            const producto=productos.products.filter(producto=>producto.SKU===idProd);
+
+            //los productos del carrito son los que ya contenía más el producto escogido
             let products=[...carrito.products,...producto];
 
             carrito=new Carrito(products);
-            //lo guardo en local-storage
-            localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
 
             if(cantidad>1){
                 carrito.actualizaUnidades(idProd,cantidad-1);
-                //lo guardo en local-storage
-                localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+
             }  
         }
+
+        //lo guardo en local-storage
+        localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
 
         const numCarrito=carrito.obtenerCarrito()[1];
         parrafo.textContent=numCarrito;
