@@ -15,8 +15,6 @@ body{
 }
 img{
   width: 100%;
-  height: auto;
-  display: block;
 }
 .header{
   padding: 1rem 0;
@@ -61,8 +59,6 @@ img{
   max-width: 220px;
   min-width: 200px;
   background-color:rgb(223, 216, 216);
-  position:relative;
-  align-items: center;
 }
 .prod1, .prod2, .prod3, .prod4{
   border: 1px solid rgb(143, 138, 138);
@@ -70,7 +66,6 @@ img{
   margin: 0rem 1rem 2rem 1rem;
   display: flex;
   flex-direction: column;
-  
 }
 .off,.nuevo{
   padding: 0.5rem;
@@ -117,7 +112,9 @@ a.icono{
   color:black;
 }
 .imagen_oferta{
+        height: 20rem;
         width: 90%;
+        max-width: 350px;
         min-width: 250px;
       }
 
