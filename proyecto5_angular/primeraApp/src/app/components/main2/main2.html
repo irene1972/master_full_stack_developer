@@ -1,0 +1,17 @@
+<br>
+<br>
+<p>Contador: {{contador}}</p>
+<p>ContadorSignal: {{contadorSignal()}}</p>
+<button (click)="aumentar()">Aumentar</button>
+<hr>
+<select (change)="cargarCiudad($event)" name="" id="">
+    <option value="">Selecciona una ciudad</option>
+    <option value="madrid">Madrid</option>
+    <option value="londres">Londres</option>
+    <option value="paris">Paris</option>
+</select>
+<p>En que ciudad vives?: {{ciudad}}</p>
+<p>En que ciudad vives?: {{ciudadSignal()}}</p>
+<hr>
+<button (click)="mostrarValor('Estoy cargando un mensaje desde eventos en angular')">Lanzar alerta</button>
+

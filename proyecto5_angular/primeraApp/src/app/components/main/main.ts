@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-main',
@@ -8,5 +8,18 @@ import { Component } from '@angular/core';
   styleUrl: './main.css',
 })
 export class Main {
+  nombre:string='Irene Olmos';
+  color:string='verde';
+  contador=signal<number>(0);
+  numero:number=0;
 
+  ngOnInit(){
+    setInterval(()=>{
+      this.numero=Math.ceil(Math.random()*100);
+      this.contador.set(Math.ceil(Math.random()*100));
+    },1000);
+  }
+  getNombre():string{
+    return 'Maria';
+  }
 }
