@@ -1,0 +1,26 @@
+<hr>
+    <ul>
+        @for(est of estudiantes; track est.id){
+            <li>{{est.name}}</li>
+        }@empty {
+      <li>No existen estudiantes</li>
+  }
+
+    </ul>
+    <hr>
+    <ul>
+        @for (estudiante of estudiantes; track estudiante.id; let cont = $count; let
+            indice = $index; let primero = $first; let ultimo = $last; let par = $even;
+            let impar = $odd) {
+            <div>
+                <p>{{ estudiante.name }}</p>
+                <p>Número de elementos: {{ $count }}</p>
+                <p>Índice actual: {{ indice }}</p>
+                <p>¿Es la primera iteración? {{ primero }}</p>
+                <p>¿Es la última iteración? {{ ultimo }}</p>
+                <p>¿Es una iteración par? {{ par }}</p>
+                <p>¿Es una iteración impar? {{ impar }}</p>
+            </div>
+        }
+    </ul>
+<hr>

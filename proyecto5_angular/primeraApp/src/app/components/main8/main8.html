@@ -1,0 +1,28 @@
+<section>
+    <ul>
+        @for(est of estudiantes; track est.id){
+            <li>{{$index}} - {{est.id}} - {{est.name}}</li>
+        }
+    </ul>
+    <hr>
+    <select name="" id="" (change)="cambiarRole($event)">
+        <option value="">No usuario</option>
+        <option value="admin">Admin</option>
+        <option value="moderador">Moderador</option>
+        <option value="suscriptor">Suscriptor</option>
+    </select>
+    @switch(role){
+        @case('admin'){
+            <p>Eres administrador. Tienes todos los permisos</p>
+        }
+        @case('moderador'){
+            <p>Eres moderador. Tienes los permisos de escritura</p>
+        }
+        @case('suscriptor'){
+            <p>Eres suscriptor. Solo tienes permisos de escritura</p>
+        }
+        @default{
+            <p>No eres usuario. No tienes ningún tipo de permiso</p>
+        }
+    }
+</section>

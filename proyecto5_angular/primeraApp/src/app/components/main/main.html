@@ -1,9 +1,14 @@
 <section class="container">
-    <h1>Componente Main</h1>
+    <h1>Componente Main. Imagen tocada: {{textoImagenTocada}}</h1>
     <hr>
     <p [class]="color">Nombre: {{nombre}}</p>
     <p>{{getNombre()}}</p>
     <!-- signals -->
     <p>Contador: {{contador()}}</p>
     <p>Numero: {{numero}}</p>
+    <hr>
+    <app-main4 [img]="imagenes[0]" [texto]="'Perro1'" (fotoEmitir)="recogerTexto($event)"></app-main4>
+    <app-main4 [img]="imagenes[1]" [texto]="texto1" (fotoEmitir)="recogerTexto($event)"></app-main4>
+    <app-main4 [img]="imagenes[2]" [texto]="texto2()" (fotoEmitir)="recogerTexto($event)"></app-main4>
+    <hr>
 </section>

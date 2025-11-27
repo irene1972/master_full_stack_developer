@@ -1,0 +1,25 @@
+<select name="" id="" (change)="cargarCiudad($event)">
+    <option value="">Seleccione ciudad</option>
+    <option value="madrid">Madrid</option>
+    <option value="londres">Londres</option>
+    <option value="paris">Paris</option>
+</select>
+<hr>
+@if(ciudad==='madrid'){
+    <section>
+        <h2>Madrid</h2>
+        <p>Madrid Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus saepe officia sed iure est laudantium placeat debitis consequatur voluptatem. Dolor vitae quod quibusdam velit, dolorum, commodi et magnam voluptate, necessitatibus dignissimos quo eveniet accusantium veritatis nulla rerum repudiandae veniam. Quae illo rerum pariatur, ratione id minus sunt amet quam veritatis adipisci laboriosam nobis in est placeat quos unde nemo alias obcaecati et, ut debitis excepturi. Similique accusamus ipsam iure libero quo qui aliquam aut, laborum ex. Quisquam vel ipsa natus tenetur quas non, voluptates sunt voluptatem beatae tempora provident tempore delectus! Fugit harum repellat distinctio recusandae magni, numquam molestiae voluptatem!</p>
+    </section>
+}@else if (ciudad==='londres') {
+    <section>
+        <h2>Londres</h2>
+        <p>Londres Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus saepe officia sed iure est laudantium placeat debitis consequatur voluptatem. Dolor vitae quod quibusdam velit, dolorum, commodi et magnam voluptate, necessitatibus dignissimos quo eveniet accusantium veritatis nulla rerum repudiandae veniam. Quae illo rerum pariatur</p>
+    </section>
+}@else{
+    <section>
+        <h2>Paris</h2>
+        <p>Paris Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus saepe officia sed iure est laudantium placeat debitis consequatur voluptatem. Dolor vitae quod quibusdam velit, dolorum, commodi et magnam voluptate, necessitatibus dignissimos quo eveniet accusantium veritatis nulla rerum repudiandae veniam. Quae illo rerum pariatur, ratione id minus sunt amet quam veritatis adipisci laboriosam nobis in est placeat quos unde nemo alias obcaecati et</p>
+    </section>
+}
+
+
