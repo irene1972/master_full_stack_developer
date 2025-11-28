@@ -6,6 +6,7 @@ import { Contador2Component } from './components/contador2/contador2.component';
 import { Prueba2Component } from './components/prueba2/prueba2.component';
 import { Prueba3Component } from './components/prueba3/prueba3.component';
 import { FormularioComponent } from './components/formulario/formulario.component';
+import { ArrobaInputComponent } from './components/arroba-input/arroba-input.component';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +18,13 @@ import { FormularioComponent } from './components/formulario/formulario.componen
     Prueba3Component,
     ContadorComponent,
     Contador2Component,
-    FormularioComponent
+    FormularioComponent,
+    ArrobaInputComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'segundaApp';
+  
 }
