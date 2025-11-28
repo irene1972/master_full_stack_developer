@@ -1,9 +1,10 @@
 <div class="container bg-dark">
     <h1>LOGO</h1>
     <ul>
-        <li><a href="">Home</a></li>
-        <li><a href="">Contacto</a></li>
-        <li><a href="">Servicios</a></li>
+        <li><a [routerLink]="['/inicio']" routerLinkActive="activo">Home</a></li>
+        <li><a [routerLink]="['/contacto']" routerLinkActive="activo">Contacto</a></li>
+        <li><a [routerLink]="['/productos']" routerLinkActive="activo">Productos</a></li>
+        <li><a [routerLink]="['/usuarios']" routerLinkActive="activo">Usuarios</a></li>
     </ul>
 </div>
 

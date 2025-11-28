@@ -1,0 +1,5 @@
+<h1>Vista de producto {{titulo}}</h1>
+<hr>
+<button [routerLink]="['/producto',titulo,'caracteristicas']">Caracteristicas</button>
+<button [routerLink]="['/producto',titulo,'opiniones']">Opiniones</button>
+<router-outlet></router-outlet>

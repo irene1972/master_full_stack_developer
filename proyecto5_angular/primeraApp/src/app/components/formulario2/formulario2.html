@@ -1,0 +1,23 @@
+<hr>
+<section class="contenedor">
+    {{nombreForm.valid}}
+    <form action="" [formGroup]="nombreForm" (ngSubmit)="cargarDatos()">
+        <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre" formControlName="nombre">
+        </div>
+        <div>
+            <label for="apellidos">Apellidos</label>
+            <input type="text" name="apellidos" id="apellidos" formControlName="apellidos">
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" formControlName="email">
+        </div>
+        <div>
+            <label for="telefono">Telefono</label>
+            <input type="number" name="telefono" id="telefono" formControlName="telefono">
+        </div>
+        <input type="submit" value="Enviar" [disabled]="!nombreForm.valid">
+    </form>
+</section>

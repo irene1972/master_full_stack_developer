@@ -1,0 +1,15 @@
+<p>nosotros works!</p>
+<ul>
+  <li><a (click)="goToPage('home')">Home</a></li>
+  <li><a (click)="goToPage('nosotros')">Nosotros</a></li>
+</ul>
+
+<ul>
+  <li><a [routerLink]="['/home']">Home</a></li>
+  <li><a [routerLink]="['/nosotros']">Nosotros</a></li>
+</ul>
+
+<ul>
+  <li><a [routerLink]="['/home']" [routerLinkActive]="['activa']">Home</a></li>
+  <li><a [routerLink]="['/nosotros']" [routerLinkActive]="['activa']">Nosotros</a></li>
+</ul>

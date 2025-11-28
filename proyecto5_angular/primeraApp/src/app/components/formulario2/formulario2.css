@@ -1,0 +1,15 @@
+/*
+.ng-invalid{
+    background-color: red;
+    color:white;
+}
+    */
+.contenedor{
+    max-width: 1004px;
+    margin:0 auto;
+}
+label,input{
+    width: 100%;
+    margin:5px 0px;
+    padding: 5px;
+}

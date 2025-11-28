@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Main4 } from '../main4/main4';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -9,6 +10,7 @@ import { Main4 } from '../main4/main4';
   styleUrl: './main.css',
 })
 export class Main {
+  router=inject(Router);
   nombre:string='Irene Olmos';
   color:string='verde';
   contador=signal<number>(0);
@@ -30,5 +32,9 @@ export class Main {
 
   recogerTexto($event:string){
     this.textoImagenTocada=$event;
+  }
+  cargarDatos(){
+    alert('datos cargados');
+    this.router.navigate(['/contacto']);
   }
 }

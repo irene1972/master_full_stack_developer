@@ -1,0 +1,9 @@
+<ul class="productos">
+    @for(producto of productos;track producto.url){
+        <li>
+            {{producto.nombre}}
+            <button [routerLink]="['/producto',producto.url]">Ver detalles</button>
+        </li>
+    }
+</ul>
+
