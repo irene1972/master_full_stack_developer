@@ -1,0 +1,8 @@
+.contenedor{
+    max-width: 1004px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+h1,h2{
+    margin: 1rem 0;
+}

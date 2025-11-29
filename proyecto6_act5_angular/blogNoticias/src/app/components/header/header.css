@@ -1,7 +1,25 @@
-.container{
-    padding: 10px;
+.contenedor{
+    max-width: 1004px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.contenedor-flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+.lista-flex{
+    display: flex;
+    gap:1rem;
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+    color:white;
 }
 
 .activo{
-    color:blue;
+    color:yellowgreen;
 }

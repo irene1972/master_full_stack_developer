@@ -1,7 +1,10 @@
-<section>
+<section class="contenedor contenedor-flex">
+    <h1><a [routerLink]="['/home']">BLOG NOTICIAS</a></h1>
     <nav>
-        <a [routerLink]="['/home']" routerLinkActive="activo">Home</a>
-        <a [routerLink]="['/contacto']" routerLinkActive="activo">Contacto</a>
-        <a [routerLink]="['/nosotros']" routerLinkActive="activo">Nosotros</a>
+        <ul class="lista-flex">
+            <li><a [routerLink]="['/home']" routerLinkActive="activo">Home</a></li>
+            <li><a [routerLink]="['/contacto']" routerLinkActive="activo">Contacto</a></li>
+            <li><a [routerLink]="['/nosotros']" routerLinkActive="activo">Nosotros</a></li>
+        </ul>
     </nav>
 </section>

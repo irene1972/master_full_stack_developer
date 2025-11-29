@@ -1,13 +1,14 @@
-<h1>Mi Blog de Noticias</h1>
+
 <section class="contenedor">
-    <form [formGroup]="miFormulario" (ngSubmit)="cargarDatos()">
+    <h1>Mi Blog de Noticias</h1>
+    <form [formGroup]="miFormulario" (ngSubmit)="cargarDatos($event)">
         <div>
             <label for="titulo">Titulo</label>
-            <input type="text" id="titulo" formControlName="titulo">
+            <input type="text" id="titulo" placeholder="Ej: Inauguración Semana de la Proximidad" formControlName="titulo">
         </div>
         <div>
             <label for="imagen">Imagen</label>
-            <input type="text" id="imagen" formControlName="imagen">
+            <input type="text" id="imagen" placeholder="Ej: /imgs/noticia3.webp" formControlName="imagen">
         </div>
         <div>
             <label for="noticia">Noticia</label>
@@ -20,15 +21,15 @@
         <input type="submit" value="Enviar" [disabled]="!miFormulario.valid">
     </form>
 </section>
-<section>
+<section class="contenedor">
     @for(post of misPosts; track post.titulo){
     <article>
         <h2>{{post.titulo}}</h2>
         <figure>
             <img [src]="post.imagen" [alt]="'Imagen de '+ post.titulo">
         </figure>
-        <p>{{post.noticia}}</p>
-        <span>{{post.fecha}}</span>
+        <p class="noticia">{{post.noticia}}</p>
+        <span>{{post.fecha | date:'dd-MM-yyyy'}}</span>
     </article>
     }
 </section>
