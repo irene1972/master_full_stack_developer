@@ -1,0 +1,21 @@
+<section class="contenedor">
+    <form [formGroup]="miFormulario" (ngSubmit)="cargarDatos()">
+        <div>
+            <label for="titulo">Titulo</label>
+            <input type="text" id="titulo" formControlName="titulo">
+        </div>
+        <div>
+            <label for="imagen">Imagen</label>
+            <input type="text" id="imagen" formControlName="imagen">
+        </div>
+        <div>
+            <label for="noticia">Noticia</label>
+            <textarea id="noticia" rows="10" formControlName="noticia"></textarea>
+        </div>
+        <div>
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" formControlName="fecha">
+        </div>
+        <input type="submit" value="Enviar" [disabled]="!miFormulario.valid">
+    </form>
+</section>

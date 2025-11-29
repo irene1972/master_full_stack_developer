@@ -1,0 +1,10 @@
+.contenedor{
+    max-width: 1004px;
+    margin: 0 auto;
+}
+
+label,input,textarea{
+    width: 100%;
+    margin:5px 0px;
+    padding: 5px;
+}
