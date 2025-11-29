@@ -56,6 +56,7 @@ export class Main {
     }
 
     formularioDom.appendChild(div);
+    this.miFormulario.reset();
 
     setTimeout(()=>{
       div.remove();
