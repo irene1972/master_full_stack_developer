@@ -8,3 +8,13 @@ label,input,textarea{
     margin:5px 0px;
     padding: 5px;
 }
+
+figure{
+    max-width: 1800px;
+}
+
+figure img{
+    width: 100%;
+    height: auto;
+    display: inline;
+}
