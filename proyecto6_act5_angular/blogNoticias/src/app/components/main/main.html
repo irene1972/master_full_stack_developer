@@ -21,12 +21,14 @@
     </form>
 </section>
 <section>
+    @for(post of misPosts; track post.titulo){
     <article>
-        <h2>Este es el título</h2>
+        <h2>{{post.titulo}}</h2>
         <figure>
-            <img src="imgs/imagen1.jpeg" alt="Imagen del blog">
+            <img [src]="post.imagen" [alt]="'Imagen de '+ post.titulo">
         </figure>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet quibusdam, alias quas voluptatibus dolorum cum ex provident enim vitae. Fugiat sint consequuntur earum. Autem possimus libero doloribus facilis aliquam sunt! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet quibusdam, alias quas voluptatibus dolorum cum ex provident enim vitae. Fugiat sint consequuntur earum. Autem possimus libero doloribus facilis aliquam sunt! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet quibusdam, alias quas voluptatibus dolorum cum ex provident enim vitae. Fugiat sint consequuntur earum. Autem possimus libero doloribus facilis aliquam sunt! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet quibusdam, alias quas voluptatibus dolorum cum ex provident enim vitae. Fugiat sint consequuntur earum. Autem possimus libero doloribus facilis aliquam sunt!</p>
-        <span>29/11/2025</span>
+        <p>{{post.noticia}}</p>
+        <span>{{post.fecha}}</span>
     </article>
+    }
 </section>

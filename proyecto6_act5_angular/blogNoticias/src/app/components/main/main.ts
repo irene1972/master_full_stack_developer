@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { IPost } from '../../interfaces/ipost';
+import { Posts } from '../../services/posts';
 
 
 @Component({
@@ -10,6 +12,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './main.css',
 })
 export class Main {
+  misPosts:IPost[]=[];
+  postsService=inject(Posts);
   miFormulario:FormGroup;
 
   constructor(){
@@ -19,6 +23,13 @@ export class Main {
       noticia:new FormControl('',[Validators.required]),
       fecha:new FormControl('',[Validators.required])
     },[]);
+  }
+
+  ngOnInit(){
+    let response=this.postsService.getAll();
+    console.log(response);
+    this.misPosts=response;
+    
   }
 
   cargarDatos(){
