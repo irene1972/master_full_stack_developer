@@ -4,15 +4,15 @@ import { IPost } from '../../interfaces/ipost';
 import { Posts } from '../../services/posts';
 import { DatePipe } from '@angular/common';
 
-
 @Component({
-  selector: 'app-main',
+  selector: 'app-blog',
   standalone:true,
   imports: [ReactiveFormsModule, DatePipe],
-  templateUrl: './main.html',
-  styleUrl: './main.css',
+  templateUrl: './blog.html',
+  styleUrl: './blog.css',
 })
-export class Main {
+export class Blog {
+  
   misPosts:IPost[]=[];
   postsService=inject(Posts);
   miFormulario:FormGroup;
@@ -62,4 +62,5 @@ export class Main {
       div.remove();
     },3000);
   }
+
 }
