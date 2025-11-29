@@ -3,11 +3,11 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "1a0c9342-5339-44d4-a203-5822ead20227"
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
-    "primeraApp": {
+    "blogNoticias": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -26,11 +26,7 @@
               }
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
-            ],
-            "scripts":[
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "src/styles.css"
             ]
           },
           "configurations": {
@@ -61,10 +57,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "primeraApp:build:production"
+              "buildTarget": "blogNoticias:build:production"
             },
             "development": {
-              "buildTarget": "primeraApp:build:development"
+              "buildTarget": "blogNoticias:build:development"
             }
           },
           "defaultConfiguration": "development"
