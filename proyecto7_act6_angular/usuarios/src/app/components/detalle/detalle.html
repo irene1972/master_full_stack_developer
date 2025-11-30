@@ -1,0 +1,19 @@
+<section class="container d-flex">
+    <div class="imagen">
+        <img [src]="miUsuario.image" [alt]="'Imagen de ' + miUsuario.first_name">
+    </div>
+    <div class="derecha">
+        <div class="contenedor datos">
+            <h1>{{miUsuario.first_name}}</h1>
+            <h2>{{miUsuario.last_name}}</h2>
+            <p class="username">Nombre Usuario: {{miUsuario.username}}</p>
+            <p>Email: {{miUsuario.email}}</p>
+        </div>
+        <div class="botones">
+            <a href="">Eliminar</a>
+            <a [routerLink]="['/actualizar']">Actualizar</a>
+            <a [routerLink]="['/home']">Volver a listado</a>
+        </div>
+    </div>
+
+</section>

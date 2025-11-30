@@ -1,0 +1,29 @@
+img{
+    border-radius: 100%;
+    flex-grow: 2;
+    margin: 4rem 2rem;
+}
+.derecha{
+    margin-top: 6rem;
+    margin-left: 4rem;
+    padding-top: 6rem;
+    padding-left: 4rem;
+    border-left: 1px solid black;
+}
+.datos{
+    padding-bottom: 2rem;
+}
+h1,h2{
+    font-size: 2rem;
+}
+.botones{
+    display: flex;
+    /*gap:1rem*/
+}
+a{
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5%;
+    padding: 1rem;
+}

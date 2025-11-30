@@ -1,7 +1,6 @@
 <section class="contenedor">
     <h1>Mi Blog de Noticias</h1>
     <form [formGroup]="miFormulario" (ngSubmit)="cargarDatos($event)">
-        {{miFormulario.valid}}
         <div>
             <label for="titulo">Titulo</label>
             <input type="text" id="titulo" placeholder="Ej: Inauguración Semana de la Proximidad" formControlName="titulo">
