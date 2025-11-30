@@ -1,4 +1,3 @@
-
 <section class="contenedor">
     <h1>Mi Blog de Noticias</h1>
     <form [formGroup]="miFormulario" (ngSubmit)="cargarDatos($event)">
@@ -30,7 +29,7 @@
             <img [src]="post.imagen" [alt]="'Imagen de '+ post.titulo">
         </figure>
         <p class="noticia">{{post.noticia}}</p>
-        <span>{{post.fecha | date:'dd-MM-yyyy'}}</span>
+        <span>{{post.fecha}}</span><!--  | date:'dd-MM-yyyy' -->
     </article>
     }
 </section>

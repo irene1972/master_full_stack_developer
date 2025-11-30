@@ -2,18 +2,19 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IPost } from '../../interfaces/ipost';
 import { Posts } from '../../services/posts';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-blog',
   standalone:true,
-  imports: [ReactiveFormsModule, DatePipe],
+  imports: [ReactiveFormsModule],
   templateUrl: './blog.html',
   styleUrl: './blog.css',
 })
 export class Blog {
   
+  //misPosts:IPost[]=[];
   misPosts:IPost[]=[];
+
   postsService=inject(Posts);
   miFormulario:FormGroup;
 
