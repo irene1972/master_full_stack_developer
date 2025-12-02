@@ -1,3 +1,5 @@
+<!-- todo: En esta pantalla deberéis mostrar toda la información del usuario que os sirva el api
+proporcionado. Además, esta pantalla tendrá tres botones. -->
 <section class="container d-flex">
     <div class="imagen">
         <img [src]="miUsuario.image" [alt]="'Imagen de ' + miUsuario.first_name">
@@ -10,8 +12,8 @@
             <p>Email: {{miUsuario.email}}</p>
         </div>
         <div class="botones">
-            <a href="">Eliminar</a>
-            <a [routerLink]="['/actualizar']">Actualizar</a>
+            <a href="" (click)="eliminar($event,miUsuario.id)">Eliminar</a>
+            <a [routerLink]="['/updateuser',miUsuario.id]">Actualizar</a>
             <a [routerLink]="['/home']">Volver a listado</a>
         </div>
     </div>

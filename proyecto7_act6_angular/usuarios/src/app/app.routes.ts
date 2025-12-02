@@ -8,8 +8,8 @@ export const routes: Routes = [
     {path:'',pathMatch:'full',redirectTo:'home'},
     {path:'home',component:Main},
     {path:'formulario',component:Formulario},
-    {path:'detalle/:id',component:Detalle},
-    {path:'actualizar',component:Formulario},
-    {path:'nuevo',component:Formulario},
+    {path:'user/:id',component:Detalle},
+    {path:'updateuser/:id',component:Formulario},
+    {path:'newuser',component:Formulario},
     {path:'**',component:C404}
 ];

@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Card } from '../card/card';
 import { IUser } from '../../interfaces/iuser';
 import { Users } from '../../services/users';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -11,7 +12,7 @@ import { Users } from '../../services/users';
   styleUrl: './main.css',
 })
 export class Main {
-  misUsuarios:any=[];
+  misUsuarios:IUser[]=[];
   usersService=inject(Users);
 
   ngOnInit(){

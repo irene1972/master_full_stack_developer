@@ -1,7 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { IUser } from '../interfaces/iuser';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IUserResponse } from '../interfaces/iuser-response';
 
 @Injectable({
   providedIn: 'root',
@@ -11,27 +12,25 @@ export class Users {
   httpClient=inject(HttpClient)
 
   //getAllUsers():Observable<IUser[]>{
-  getAllUsers():Observable<any>{
+  getAllUsers():Observable<IUserResponse>{
     //return this.httpClient.get<IUser[]>(this.baseUrl);
-    return this.httpClient.get<any>(this.baseUrl);
+    return this.httpClient.get<IUserResponse>(this.baseUrl);
   }
 
-  getUserById(id:number):Observable<any>{
-    console.log('irene',this.baseUrl+'/'+id);
-    return this.httpClient.get<any>(this.baseUrl+'/'+id);
+  getUserById(id:number):Observable<IUserResponse>{
+    return this.httpClient.get<IUserResponse>(this.baseUrl+'/'+id);
   }
-  /*
-  private usuarios:IUser[]=USUARIOS;
 
-  getAll():IUser[]{
-    return this.usuarios;
+  insertUser(body:IUser):Observable<any>{
+    let url='https://peticiones.online/api/users';
+    return this.httpClient.post(url,body, {});
   }
-  getById(id:number):IUser | undefined{
-    return this.usuarios.find(usuario=>usuario.id===id)
+  deleteUser(id:number):Observable<any>{
+    let url='https://peticiones.online/api/users/';
+    return this.httpClient.delete(url + id,{});
   }
-  insert(user:IUser):string{
-    this.usuarios.push(user);
-    return 'Usuario guardado correctamente';
+  updateUser(id:number,body:IUser):Observable<any>{
+    let url='https://peticiones.online/api/users/';
+    return this.httpClient.put(url + id,body,{})
   }
-  */
 }

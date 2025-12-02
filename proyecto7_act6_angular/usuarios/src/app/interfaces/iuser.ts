@@ -1,12 +1,4 @@
 export interface IUser {
-    page:        number;
-    per_page:    number;
-    total:       number;
-    total_pages: number;
-    results:     Result[];
-}
-
-export interface Result {
     _id:        string;
     id:         number;
     first_name: string;
