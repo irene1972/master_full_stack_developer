@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { Card } from '../card/card';
 import { IUser } from '../../interfaces/iuser';
 import { Users } from '../../services/users';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-main',

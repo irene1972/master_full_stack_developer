@@ -1,5 +1,5 @@
 import { Component, Input, inject } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { Users } from '../../services/users';
 import { IUser } from '../../interfaces/iuser';
 
