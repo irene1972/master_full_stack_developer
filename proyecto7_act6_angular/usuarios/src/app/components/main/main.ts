@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Card } from '../card/card';
 import { IUser } from '../../interfaces/iuser';
 import { Users } from '../../services/users';
+import { IUserResponse } from '../../interfaces/iuser-response';
 
 @Component({
   selector: 'app-main',
@@ -14,7 +15,7 @@ export class Main {
   misUsuarios:IUser[]=[];
   usersService=inject(Users);
 
-  ngOnInit(){
+  async ngOnInit(){
     this.usersService.getAllUsers().subscribe((data)=>{
       console.log(data.results);
       this.misUsuarios=data.results;

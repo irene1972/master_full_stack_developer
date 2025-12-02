@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { IUser } from '../interfaces/iuser';
-import { HttpClient, HttpContext } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IUserResponse } from '../interfaces/iuser-response';
 
@@ -11,14 +11,12 @@ export class Users {
   private baseUrl='https://peticiones.online/api/users';
   httpClient=inject(HttpClient)
 
-  //getAllUsers():Observable<IUser[]>{
   getAllUsers():Observable<IUserResponse>{
-    //return this.httpClient.get<IUser[]>(this.baseUrl);
     return this.httpClient.get<IUserResponse>(this.baseUrl);
   }
 
-  getUserById(id:number):Observable<IUserResponse>{
-    return this.httpClient.get<IUserResponse>(this.baseUrl+'/'+id);
+  getUserById(id:number):Observable<IUser>{
+    return this.httpClient.get<IUser>(this.baseUrl+'/'+id);
   }
 
   insertUser(body:IUser):Observable<any>{
