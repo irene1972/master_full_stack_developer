@@ -1,32 +1,3 @@
 .activo{
-    color:blue;
-}
-
-h2{
-        margin:0 2rem;
-    }
-
-.lista{
-        margin:0 2rem;
-    }
-a{
-    text-decoration: none;
-    color:black;
-}
-ul{
-    list-style-type: none;
-}
-
-@media screen and (min-width: 768px) {
-    .contenedor{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        
-    }
-    .lista{
-        display: flex;
-        gap:1.5rem;
-    }
-    
+    color:blue !important;
 }

@@ -2,19 +2,19 @@
 proporcionado. Además, esta pantalla tendrá tres botones. -->
 <section class="container d-flex">
     <div class="imagen">
-        <img [src]="miUsuario.image" [alt]="'Imagen de ' + miUsuario.first_name">
+        <img class="rounded-circle" [src]="miUsuario.image" [alt]="'Imagen de ' + miUsuario.first_name">
     </div>
-    <div class="derecha">
-        <div class="contenedor datos">
-            <h1>{{miUsuario.first_name}}</h1>
-            <h2>{{miUsuario.last_name}}</h2>
+    <div class="derecha border-start border-dark">
+        <div class="contenedor datos pb-5">
+            <h1 class="fs-2">{{miUsuario.first_name}}</h1>
+            <h2 class="fs-2">{{miUsuario.last_name}}</h2>
             <p class="username">Nombre Usuario: {{miUsuario.username}}</p>
             <p>Email: {{miUsuario.email}}</p>
         </div>
-        <div class="botones">
-            <a href="" (click)="eliminar($event,miUsuario.id)">Eliminar</a>
-            <a [routerLink]="['/updateuser',miUsuario.id]">Actualizar</a>
-            <a [routerLink]="['/home']">Volver a listado</a>
+        <div class="botones d-flex">
+            <a class="text-decoration-none text-dark border border-dark rounded p-3" href="" (click)="eliminar($event,miUsuario.id)">Eliminar</a>
+            <a class="text-decoration-none text-dark border border-dark rounded p-3" [routerLink]="['/updateuser',miUsuario.id]">Actualizar</a>
+            <a class="text-decoration-none text-dark border border-dark rounded p-3" [routerLink]="['/home']">Volver a listado</a>
         </div>
     </div>
 
