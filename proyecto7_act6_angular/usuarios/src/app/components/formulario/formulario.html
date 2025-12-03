@@ -1,5 +1,5 @@
 <section class="container">
-    <h1 class="titulo">NUEVO USUARIO</h1>
+    <h1 class="titulo fs-2">NUEVO USUARIO</h1>
     <form [formGroup]="miForm" (ngSubmit)="cargarDatos($event)">
         <div class="form-group p-3">
             <label class="mb-2" for="nombre">Nombre Usuario</label>
@@ -18,6 +18,6 @@
             <label class="mb-2" for="imagen">Imagen Usuario</label>
             <input type="text" class="form-control" id="imagen" placeholder="Introducir imagen" formControlName="imagen">
         </div>
-        <button type="submit" class="btn btn-primary m-3" [disabled]="!miForm.valid">Guardar</button>
+        <button type="submit" class="btn btn-primary m-3 bg-white text-black border border-dark" [disabled]="!miForm.valid">Guardar</button>
     </form>
 </section>

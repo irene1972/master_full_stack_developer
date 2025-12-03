@@ -12,7 +12,7 @@ proporcionado. Además, esta pantalla tendrá tres botones. -->
             <p>Email: {{miUsuario.email}}</p>
         </div>
         <div class="botones d-flex">
-            <a class="text-decoration-none text-dark border border-dark rounded p-3" href="" (click)="eliminar($event,miUsuario.id)">Eliminar</a>
+            <a class="text-decoration-none text-dark border border-dark rounded p-3" href="" (click)="eliminar2($event,miUsuario.id)">Eliminar</a>
             <a class="text-decoration-none text-dark border border-dark rounded p-3" [routerLink]="['/updateuser',miUsuario.id]">Actualizar</a>
             <a class="text-decoration-none text-dark border border-dark rounded p-3" [routerLink]="['/home']">Volver a listado</a>
         </div>
