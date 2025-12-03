@@ -1,8 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Card } from '../card/card';
-import { IUser } from '../../interfaces/iuser';
 import { Users } from '../../services/users';
-import { IUserResponse } from '../../interfaces/iuser-response';
 import { CommonModule } from '@angular/common';
 import { map } from 'rxjs';
 
