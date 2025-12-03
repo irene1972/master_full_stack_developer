@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { IUser } from '../interfaces/iuser';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { IUserResponse } from '../interfaces/iuser-response';
 
 @Injectable({
@@ -13,6 +13,10 @@ export class Users {
 
   getAllUsers():Observable<IUserResponse>{
     return this.httpClient.get<IUserResponse>(this.baseUrl);
+  }
+
+  getAllUsersPromise():Promise<IUserResponse>{
+    return firstValueFrom(this.httpClient.get<IUserResponse>(this.baseUrl));
   }
 
   getUserById(id:number):Observable<IUser>{
