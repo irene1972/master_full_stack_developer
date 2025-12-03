@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Users } from '../../services/users';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-formulario',
@@ -16,21 +17,22 @@ export class Formulario {
   miForm:FormGroup;
   misUsuarios:any=[];
   usersService=inject(Users);
+  titulo:string='NUEVO USUARIO';
+  textoBoton:string='Guardar';
 
   activeRoute=inject(ActivatedRoute);
 
   ngOnInit(){
     this.activeRoute.params.subscribe((params:any)=>{
         if(Object.keys(params).length > 0){
+          //FORMULARIO DE ACTUALIZACIÓN
           //todo: arreglar cuando la api devuelva los datos correctamente
-          let tituloDom=document.querySelector('.titulo');
-          let botonDom=document.querySelector('BUTTON');
 
-          if(tituloDom){
-            tituloDom.textContent='ACTUALIZAR USUARIO';
-          }
+          this.titulo='ACTUALIZAR USUARIO';
+          this.textoBoton='Actualizar';
           this.paramId=parseInt(params.id);
           this.miUsuario=this.usersService.getUserById(params.id);
+          
           /*
           this.miUsuario={
                           "id": 55,
@@ -41,13 +43,14 @@ export class Formulario {
                           "image": "https://i.pravatar.cc/500?u=emilio.alvaduran@peticiones.online"
                         };
           */
-          if(botonDom) botonDom.textContent='Actualizar';
+          
           this.miForm.controls['nombre'].setValue(this.miUsuario.first_name);
           this.miForm.controls['apellidos'].setValue(this.miUsuario.last_name);
           this.miForm.controls['email'].setValue(this.miUsuario.email);
           this.miForm.controls['imagen'].setValue(this.miUsuario.image);
         
       }else{
+        //FORMULARIO DE NUEVO USUARIO
         this.miUsuario={};
       }
 
@@ -89,7 +92,16 @@ export class Formulario {
             "image": "https://i.pravatar.cc/500?u=mariadelcarmen.herreravillanueva@peticiones.online"
             };
         */
-        this.mostrarMensaje(data,formularioDom);
+        if(data.error){
+          Swal.fire('Ha habido un error', '', 'info');
+          //div.textContent='Ha habido un error';
+          //div.classList.add('error');
+        }else{
+          this.miForm.reset();
+          Swal.fire('Actualizado!', '', 'success');
+          //div.textContent='Se han guardado correctamente los datos del usuario ' + data.email;
+          //div.classList.add('exito');        
+        }
         
       });
 
@@ -97,11 +109,17 @@ export class Formulario {
       let insertar:any;
       
       insertar=this.usersService.insertUser(body).subscribe((data)=>{
-        this.mostrarMensaje(data,formularioDom);
+        //this.mostrarMensaje(data,formularioDom);
+        if(data.error){
+          Swal.fire('Ha habido un error', '', 'info');
+        }else{
+          this.miForm.reset();
+          Swal.fire('Guardado!', '', 'success');      
+        }
       });
     }
   }
-
+  /*
   mostrarMensaje(data:any,referencia:any):void{
     let div=document.createElement('DIV');
 
@@ -120,5 +138,5 @@ export class Formulario {
           div.remove();
         },3000);
   }
-  
+  */
 }
