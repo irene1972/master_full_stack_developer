@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
   templateUrl: './formulario.html',
   styleUrl: './formulario.css',
 })
+
 export class Formulario {
   paramId:number=0;
   miUsuario:any;
@@ -94,13 +95,10 @@ export class Formulario {
         */
         if(data.error){
           Swal.fire('Ha habido un error', '', 'info');
-          //div.textContent='Ha habido un error';
-          //div.classList.add('error');
+
         }else{
           this.miForm.reset();
-          Swal.fire('Actualizado!', '', 'success');
-          //div.textContent='Se han guardado correctamente los datos del usuario ' + data.email;
-          //div.classList.add('exito');        
+          Swal.fire('Actualizado!', '', 'success');       
         }
         
       });
@@ -109,7 +107,7 @@ export class Formulario {
       let insertar:any;
       
       insertar=this.usersService.insertUser(body).subscribe((data)=>{
-        //this.mostrarMensaje(data,formularioDom);
+       
         if(data.error){
           Swal.fire('Ha habido un error', '', 'info');
         }else{
@@ -119,24 +117,5 @@ export class Formulario {
       });
     }
   }
-  /*
-  mostrarMensaje(data:any,referencia:any):void{
-    let div=document.createElement('DIV');
 
-        if(data.error){
-          div.textContent='Ha habido un error';
-          div.classList.add('error');
-        }else{
-          this.miForm.reset();
-          div.textContent='Se han guardado correctamente los datos del usuario ' + data.email;
-          div.classList.add('exito');        
-        }
-        
-        referencia.appendChild(div);
-        
-        setTimeout(()=>{
-          div.remove();
-        },3000);
-  }
-  */
 }

@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './card.html',
   styleUrl: './card.css',
 })
+
 export class Card {
   miUsuario:any;
   usersService=inject(Users);
@@ -63,42 +64,4 @@ export class Card {
         }
       });
     }
-
-/*
-  eliminar($event:any,id:number){
-    let eliminar:any;
-    $event.preventDefault();
-    //alert('Eliminar usuario con id' + id);
-    let tituloDom=document.querySelector('H1');
-    
-    
-
-    if (window.confirm("¿Realmente quieres eliminar el usuario?")) {
-      eliminar=this.usersService.deleteUser(id).subscribe((data)=>{
-        console.log(data);
-
-        this.mostrarMensaje(data,eliminar,tituloDom);
-      });
-    }
-
-    
-  }
-  mostrarMensaje(data:IUser,eliminar:any,referencia:any){
-    let div=document.createElement('DIV');
-        
-    if(eliminar.error){
-      div.textContent='Ha habido un error';
-      div.classList.add('error');
-    }else{
-      this.miUsuario=data;
-      div.textContent='Se ha eliminado el usuario ' + this.miUsuario.first_name + ' correctamente';
-      div.classList.add('exito');
-    }
-    referencia?.appendChild(div);
-  
-    setTimeout(()=>{
-      div.remove();
-    },3000);
-  }
-  */
 }

@@ -14,27 +14,9 @@ import { map } from 'rxjs';
 
 export class Main {
   usersService=inject(Users);
-  //misUsuarios:IUser[]=[];
-  //items$:any;
-  //response:IUserResponse|undefined;
-  //misUsuariosPromise:IUser[]=[];
 
-  // Observable que contiene directamente el array results
   items$ = this.usersService.getAllUsers().pipe(
     map((resp) => resp.results)
   );
-  /*
-  //Esta opción no funciona bien al recargar no aparece el bucle for
-  constructor(){
-    this.usersService.getAllUsers().subscribe((data)=>{
-      console.log(data.results);
-      this.misUsuarios=data.results;
-    });
-  }
-  //Esta opción tampoco funciona bien al recargar no aparece el bucle for
-  async ngOnInit(){
-    this.response=await this.usersService.getAllUsersPromise();
-    this.misUsuariosPromise=this.response.results;
-  }
-  */
+
 }
