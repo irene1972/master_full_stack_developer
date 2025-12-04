@@ -23,6 +23,26 @@ export class Formulario {
 
   activeRoute=inject(ActivatedRoute);
 
+  constructor(){
+    
+    this.miForm=new FormGroup({
+      nombre:new FormControl('',[
+        Validators.required
+      ]),
+      apellidos:new FormControl('',[
+        Validators.required
+      ]),
+      email:new FormControl('',[
+        Validators.required,
+        //Validators.email,
+        Validators.pattern( /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+      ]),
+      imagen:new FormControl('',[
+        Validators.required
+      ])
+    },[]);
+  }
+
   ngOnInit(){
     this.activeRoute.params.subscribe((params:any)=>{
         if(Object.keys(params).length > 0){
@@ -58,30 +78,17 @@ export class Formulario {
     });
   }
 
-  constructor(){
-    
-    this.miForm=new FormGroup({
-      nombre:new FormControl('',[
-        Validators.required
-      ]),
-      apellidos:new FormControl('',[
-        Validators.required
-      ]),
-      email:new FormControl('',[
-        Validators.required,
-        Validators.email
-      ]),
-      imagen:new FormControl('',[
-        Validators.required
-      ])
-    },[]);
-  }
-
-  cargarDatos($event:any){
+  cargarDatos(){
     let body:any=this.miForm.value;
-    let formularioDom=$event.target;
 
-    if(Object.keys(this.miUsuario).length > 0){      
+    //marcar campos como touched al guardar
+    if (this.miForm.invalid) {
+      this.miForm.markAllAsTouched();
+      return;
+    }
+
+    if(Object.keys(this.miUsuario).length > 0){
+      //actualizar datos    
       this.usersService.updateUser(this.paramId,body).subscribe((data)=>{
         /*
         data={
@@ -104,6 +111,7 @@ export class Formulario {
       });
 
     }else{
+      //guardar datos
       let insertar:any;
       
       insertar=this.usersService.insertUser(body).subscribe((data)=>{
