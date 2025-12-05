@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `mis_restaurantes`.`reservas` (
   `fecha` DATETIME NULL DEFAULT NULL,
   `restaurantes_id` INT NOT NULL,
   `mesas_id` INT NOT NULL,
-  `clientes_id` INT NOT NULL,
+  `clientes_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_reservas_restaurantes1_idx` (`restaurantes_id` ASC) VISIBLE,
   INDEX `fk_reservas_mesas1_idx` (`mesas_id` ASC) VISIBLE,
@@ -154,12 +154,12 @@ INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `res
 INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('2', '5', '4');
 INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('1', '4', '5');
 INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('2', '5', '5');
-INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('1', '9', '6');
-INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('2', '7', '6');
-INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('1', '6', '7');
-INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('2', '6', '7');
-INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('1', '4', '8');
-INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('2', '5', '8');
+INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('1', '2', '6');
+INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('2', '2', '6');
+INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('1', '2', '7');
+INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('2', '2', '7');
+INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('1', '2', '8');
+INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('2', '2', '8');
 INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('1', '2', '9');
 INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('2', '7', '9');
 INSERT INTO `mis_restaurantes`.`mesas` (`numero_mesa`, `numero_comensales`, `restaurantes_id`) VALUES ('1', '15', '10');
@@ -215,11 +215,15 @@ INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `clien
 INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `clientes_id`, `fecha`) VALUES ('5', '1', '4', '2026-01-11 14:00:00');
 INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `clientes_id`, `fecha`) VALUES ('5', '1', '5', '2026-01-11 12:00:00');
 INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `clientes_id`, `fecha`) VALUES ('5', '1', '6', '2026-01-11 13:00:00');
-INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `clientes_id`, `fecha`) VALUES ('6', '2', '7', '2026-01-12 14:00:00');
-INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `clientes_id`, `fecha`) VALUES ('6', '1', '8', '2026-01-12 13:00:00');
-INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `clientes_id`, `fecha`) VALUES ('7', '1', '9', '2026-01-13 14:00:00');
-INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `clientes_id`, `fecha`) VALUES ('8', '2', '1', '2026-01-13 12:00:00');
-INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `clientes_id`, `fecha`) VALUES ('9', '2', '2', '2026-01-13 13:00:00');
+INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `clientes_id`, `fecha`) VALUES ('6', '11', '7', '2026-01-12 14:00:00');
+INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `clientes_id`, `fecha`) VALUES ('6', '12', '8', '2026-01-12 13:00:00');
+INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `clientes_id`, `fecha`) VALUES ('7', '13', '9', '2026-01-13 14:00:00');
+INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `clientes_id`, `fecha`) VALUES ('8', '14', '1', '2026-01-13 12:00:00');
+INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `clientes_id`, `fecha`) VALUES ('9', '15', '2', '2026-01-13 13:00:00');
+INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `fecha`) VALUES ('6', '16', '2026-01-12 12:00:00');
+INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `fecha`) VALUES ('6', '17', '2026-01-12 13:00:00');
+INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `fecha`) VALUES ('6', '18', '2026-01-12 14:00:00');
+INSERT INTO `mis_restaurantes`.`reservas` (`restaurantes_id`, `mesas_id`, `fecha`) VALUES ('6', '19', '2026-01-12 15:00:00');
 
 # Sentencia SQL de selección para obtener todas las reservas que tiene un
 restaurante para un día concreto, mostrando los datos del cliente y de la mesa
@@ -245,10 +249,11 @@ where id=5;
 
 # Sentencia SQL de eliminación para poder eliminar todos los restaurantes favoritos
 que no se encuentren abiertos para un cliente concreto.
-delete from favoritos where id in 
-(select f.id from favoritos as f
+delete from favoritos where id in (select id 
+from (select f.id from favoritos as f
 inner join restaurantes as rest on f.restaurantes_id=rest.id
-where f.clientes_id=7 and rest.abierto=0);
+where f.clientes_id=7 and rest.abierto=0) 
+as temp)
 
 # Sentencia SQL de selección para obtener el nombre de los restaurantes con más
 de tres reservas de cuatro o más comensales para un día específico
@@ -269,9 +274,9 @@ where r.restaurantes_id=1
 # Sentencia SQL de selección para obtener las mesas que dispongan de espacio para
 dos comensales y que se encuentren disponibles (sin reserva) en un restaurante
 específico para una fecha y hora concretos.
-select * from reservas as r
-right join mesas as m on r.mesas_id=m.id
-where m.numero_comensales=2
+select r.mesas_id,r.clientes_id,m.numero_mesa,m.numero_comensales from reservas as r
+inner join mesas as m on r.mesas_id=m.id
+where m.numero_comensales=2 and r.clientes_id is null
 
 # Sentencia SQL de selección para obtener el nombre del cliente que ha realizado
 más reservas en un restaurante específico dentro de un rango de fechas dado.
