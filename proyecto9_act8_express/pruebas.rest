@@ -1,0 +1,27 @@
+GET http://localhost:3000/api/autores
+
+###
+
+POST http://localhost:3000/api/autores
+Content-Type: application/json
+
+{
+    "nombre":"Autor3",
+    "email":"autor3@autor3.com",
+    "imagen":"imagen3.jpeg"
+}
+
+###
+
+PUT http://localhost:3000/api/autores/3
+Content-Type: application/json
+
+{
+    "nombre":"Autor3_",
+    "email":"autor3@autor3_.com",
+    "imagen":"imagen3.jpeg"
+}
+
+###
+
+DELETE http://localhost:3000/api/autores/3

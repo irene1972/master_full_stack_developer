@@ -1,0 +1,13 @@
+[05-12-2025] Método: GET. Url: /
+[05-12-2025 20:32] Método: GET. Url: /api/users
+[05-12-2025 21:26] Método: GET. Url: /api/autores
+[05-12-2025 21:27] Método: GET. Url: /api/autores
+[05-12-2025 21:29] Método: GET. Url: /api/autores
+[05-12-2025 21:45] Método: POST. Url: /api/autores
+[05-12-2025 22:22] Método: GET. Url: /api/autores
+[05-12-2025 22:42] Método: PUT. Url: /api/autores/3
+[05-12-2025 22:43] Método: GET. Url: /api/autores
+[05-12-2025 22:44] Método: PUT. Url: /api/autores/3
+[05-12-2025 22:51] Método: PUT. Url: /api/autores/3
+[05-12-2025 23:02] Método: DELETE. Url: /api/autores/3
+[05-12-2025 23:03] Método: DELETE. Url: /api/autores/3
