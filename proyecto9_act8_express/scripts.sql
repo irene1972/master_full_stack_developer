@@ -39,8 +39,7 @@ CREATE TABLE IF NOT EXISTS `mi_blog`.`posts` (
   `titulo` VARCHAR(45) NULL DEFAULT NULL,
   `descripcion` VARCHAR(100) NULL DEFAULT NULL,
   `fecha_creacion` VARCHAR(45) NULL DEFAULT NULL,
-  `new_tablecol` DATETIME NULL DEFAULT NULL,
-  `categoría` VARCHAR(45) NULL DEFAULT NULL,
+  `categoria` VARCHAR(45) NULL DEFAULT NULL,
   `autores_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_posts_autores_idx` (`autores_id` ASC) VISIBLE,
@@ -57,3 +56,10 @@ COLLATE = utf8mb4_spanish_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO `mi_blog`.`autores` (`nombre`, `email`, `imagen`) VALUES ('Autor1', 'autor1@autor1.com', 'imagen1.jpeg');
+INSERT INTO `mi_blog`.`autores` (`nombre`, `email`, `imagen`) VALUES ('Autor2', 'autor2@autor2.com', 'imagen2.jpeg');
+
+INSERT INTO `mi_blog`.`posts` (`titulo`, `descripcion`, `fecha_creacion`, `categoria`, `autores_id`) VALUES ('Las tortugas', 'Reprehenderit alias deserunt fugiat ipsum, quo dolorem post.', '2025-12-05', 'Animales', '2');
+INSERT INTO `mi_blog`.`posts` (`titulo`, `descripcion`, `fecha_creacion`, `categoria`, `autores_id`) VALUES ('Los elefantes', 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit', '2025-12-06', 'Animales', '2');
+

@@ -32,9 +32,9 @@ const edit=async(req,res,next)=>{
 const remove=async(req,res,next)=>{
     const {autorId}=req.params;
     try {
-        const cliente=await Autor.selectById(autorId);
+        const autor=await Autor.selectById(autorId);
         await Autor.deleteById(autorId);
-        res.json(cliente);
+        res.json(autor);
     } catch (error) {
         next(error);
     }

@@ -1,0 +1,35 @@
+GET http://localhost:3000/api/posts
+
+###
+
+GET http://localhost:3000/api/posts/autor/2
+
+###
+
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+    "titulo": "Los peces",
+    "descripcion": "Reprehenderit alias deserunt fugiat ipsum, quo dolorem post.",
+    "fecha_creacion": "2025-12-07",
+    "categoria": "Animales",
+    "autores_id": 2
+}
+
+###
+
+PUT http://localhost:3000/api/posts/2
+Content-Type: application/json
+
+{
+    "titulo": "Los peces",
+    "descripcion": "Reprehenderit alias deserunt fugiat ipsum, quo dolorem post.",
+    "fecha_creacion": "2025-12-10",
+    "categoria": "Animales",
+    "autores_id": 2
+}
+
+###
+
+DELETE http://localhost:3000/api/posts/3
