@@ -21,7 +21,6 @@
     "mysql2": "^3.15.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
     "@types/express": "^5.0.0",
     "cli-express": "^1.2.0",
     "nodemon": "^3.0.1"

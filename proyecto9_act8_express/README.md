@@ -97,3 +97,74 @@ changes, please open an issue first to discuss what you would like to change.
 
 This project is licensed under the ISC License - see the LICENSE file for
 details.
+
+### API
+
+Example of API calls:
+
+#### AUTORES
+
+```http
+GET http://localhost:3000/api/autores
+
+
+POST http://localhost:3000/api/autores
+Content-Type: application/json
+
+{
+    "nombre":"Autor3",
+    "email":"autor3@autor3.com",
+    "imagen":"imagen3.jpeg"
+}
+
+
+PUT http://localhost:3000/api/autores/3
+Content-Type: application/json
+
+{
+    "nombre":"Autor3_",
+    "email":"autor3@autor3_.com",
+    "imagen":"imagen3.jpeg"
+}
+
+
+DELETE http://localhost:3000/api/autores/3
+
+```
+
+#### POSTS
+
+```http
+GET http://localhost:3000/api/posts
+
+
+GET http://localhost:3000/api/posts/autor/2
+
+
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+    "titulo": "Los peces",
+    "descripcion": "Reprehenderit alias deserunt fugiat ipsum, quo dolorem post.",
+    "fecha_creacion": "2025-12-07",
+    "categoria": "Animales",
+    "autores_id": 2
+}
+
+
+PUT http://localhost:3000/api/posts/2
+Content-Type: application/json
+
+{
+    "titulo": "Los peces",
+    "descripcion": "Reprehenderit alias deserunt fugiat ipsum, quo dolorem post.",
+    "fecha_creacion": "2025-12-10",
+    "categoria": "Animales",
+    "autores_id": 2
+}
+
+
+DELETE http://localhost:3000/api/posts/3
+
+```
