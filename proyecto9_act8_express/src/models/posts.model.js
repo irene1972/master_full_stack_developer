@@ -1,14 +1,32 @@
 const db=require('../config/db');
 
 const selectAll=async()=>{
-    const [result]=await db.query(`select p.titulo,p.descripcion,p.fecha_creacion,p.categoria,a.id as autorId,a.nombre,a.email,a.imagen 
+    const [result]=await db.query(`select 
+                                        p.id,
+                                        p.titulo,
+                                        p.descripcion,
+                                        p.fecha_creacion,
+                                        p.categoria,
+                                        a.id as autorId,
+                                        a.nombre,
+                                        a.email,
+                                        a.imagen 
                                     from posts p
                                     inner join autores a on p.autores_id=a.id`);
     return result;
 }
 
 const selectById=async(postId)=>{
-    const [result]=await db.query(`select p.titulo,p.descripcion,p.fecha_creacion,p.categoria,a.id as autorId,a.nombre,a.email,a.imagen 
+    const [result]=await db.query(`select 
+                                        p.id,
+                                        p.titulo,
+                                        p.descripcion,
+                                        p.fecha_creacion,
+                                        p.categoria,
+                                        a.id as autorId,
+                                        a.nombre,
+                                        a.email,
+                                        a.imagen 
                                     from posts p
                                     inner join autores a on p.autores_id=a.id
                                     where p.id=?`,
@@ -19,7 +37,16 @@ const selectById=async(postId)=>{
 
 const selectByAutor=async(autorId)=>{
     
-    const [result]=await db.query(`select p.titulo,p.descripcion,p.fecha_creacion,p.categoria,a.id as autorId,a.nombre,a.email,a.imagen 
+    const [result]=await db.query(`select 
+                                        p.id,
+                                        p.titulo,
+                                        p.descripcion,
+                                        p.fecha_creacion,
+                                        p.categoria,
+                                        a.id as autorId,
+                                        a.nombre,
+                                        a.email,
+                                        a.imagen 
                                     from posts p
                                     inner join autores a on p.autores_id=a.id
                                     where a.id=?`,

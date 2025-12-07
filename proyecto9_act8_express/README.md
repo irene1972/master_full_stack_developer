@@ -108,6 +108,9 @@ Example of API calls:
 GET http://localhost:3000/api/autores
 
 
+GET http://localhost:3000/api/autores/getById/2
+
+
 POST http://localhost:3000/api/autores
 Content-Type: application/json
 
@@ -136,6 +139,9 @@ DELETE http://localhost:3000/api/autores/3
 
 ```http
 GET http://localhost:3000/api/posts
+
+
+GET http://localhost:3000/api/posts/getById/4
 
 
 GET http://localhost:3000/api/posts/autor/2

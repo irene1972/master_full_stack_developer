@@ -9,6 +9,16 @@ const getAll=async(req,res,next)=>{
     }
 }
 
+const getById=async(req,res,next)=>{
+    const {postId}=req.params;
+    try {
+        const result = await Post.selectById(postId);
+        res.json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+
 const getByAutor=async(req,res,next)=>{
     const {autorId}=req.params;
     try {
@@ -52,6 +62,7 @@ const remove=async(req,res,next)=>{
 
 module.exports={
     getAll,
+    getById,
     getByAutor,
     create,
     edit,
