@@ -4,6 +4,7 @@
 
 body{
   border:0;
+  padding: 0;
 }
 
 .verde{
@@ -20,4 +21,19 @@ body{
 .rojo{
   background-color: red;
   color:white;
+}
+#tablas{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.tabla{
+  padding: 5px;
+  border: 1px solid black;
+  padding-right: 3rem;
+  
+}
+ul{
+  list-style-type: none;
+  
 }
