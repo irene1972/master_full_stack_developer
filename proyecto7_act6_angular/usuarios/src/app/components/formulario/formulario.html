@@ -1,6 +1,6 @@
 <section class="container">
     <h1 class="titulo fs-2">{{titulo}}</h1>
-    {{miForm.get('nombre')?.touched}}
+    <!--{{miForm.get('nombre')?.touched}}-->
     <form [formGroup]="miForm" (ngSubmit)="cargarDatos()">
         <div class="form-group p-3">
             <label class="mb-2" for="nombre">Nombre Usuario</label>

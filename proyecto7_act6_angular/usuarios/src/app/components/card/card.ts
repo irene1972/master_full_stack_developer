@@ -18,8 +18,9 @@ export class Card {
   @Input() imagen:string='';
   @Input() nombre:string='';
   @Input() id:number=0;
+  @Input() _id:string|undefined='';
 
-  eliminar2($event:any,id:number){
+  eliminar2($event:any,id:any){
       $event.preventDefault();
       Swal.fire({
         title: '¿Estás seguro de eliminar el usuario?',
@@ -34,28 +35,8 @@ export class Card {
   
             eliminar=this.usersService.deleteUser(id).subscribe((data)=>{
             console.log(data);
-            
-            /*
-            data={
-                  "id": 55,
-                  "first_name": "Emilio",
-                  "last_name": "Alva Durán",
-                  "username": "emilio.alva",
-                  "email": "emilio.alvaduran@peticiones.online",
-                  "image": "https://i.pravatar.cc/500?u=emilio.alvaduran@peticiones.online"
-                  };
   
-            eliminar={
-                    "id": 55,
-                    "first_name": "Emilio",
-                    "last_name": "Alva Durán",
-                    "username": "emilio.alva",
-                    "email": "emilio.alvaduran@peticiones.online",
-                    "image": "https://i.pravatar.cc/500?u=emilio.alvaduran@peticiones.online"
-                      };
-            */
-  
-            if(eliminar.error){
+            if(data.error){
               Swal.fire('Ha habido un error', '', 'info');
             }else{
               Swal.fire('Eliminado!', '', 'success');

@@ -14,9 +14,10 @@ import { map } from 'rxjs';
 
 export class Main {
   usersService=inject(Users);
-
+  
   items$ = this.usersService.getAllUsers().pipe(
     map((resp) => resp.results)
   );
+  
 
 }

@@ -51,24 +51,18 @@ export class Formulario {
 
           this.titulo='ACTUALIZAR USUARIO';
           this.textoBoton='Actualizar';
-          this.paramId=parseInt(params.id);
-          this.miUsuario=this.usersService.getUserById(params.id);
-          
-          /*
-          this.miUsuario={
-                          "id": 55,
-                          "first_name": "Emilio",
-                          "last_name": "Alva Durán",
-                          "username": "emilio.alva",
-                          "email": "emilio.alvaduran@peticiones.online",
-                          "image": "https://i.pravatar.cc/500?u=emilio.alvaduran@peticiones.online"
-                        };
-          */
-          
-          this.miForm.controls['nombre'].setValue(this.miUsuario.first_name);
-          this.miForm.controls['apellidos'].setValue(this.miUsuario.last_name);
-          this.miForm.controls['email'].setValue(this.miUsuario.email);
-          this.miForm.controls['imagen'].setValue(this.miUsuario.image);
+          this.paramId=params.id;
+          //console.log(this.paramId);
+          //this.miUsuario=this.usersService.getUserById(params.id);
+          //console.log(this.usersService.getUserById(params.id));
+          this.usersService.getUserById(params.id).subscribe((data)=>{
+            this.miUsuario=data;
+
+            this.miForm.controls['nombre'].setValue(this.miUsuario.first_name);
+            this.miForm.controls['apellidos'].setValue(this.miUsuario.last_name);
+            this.miForm.controls['email'].setValue(this.miUsuario.email);
+            this.miForm.controls['imagen'].setValue(this.miUsuario.image);
+          });
         
       }else{
         //FORMULARIO DE NUEVO USUARIO
@@ -90,16 +84,7 @@ export class Formulario {
     if(Object.keys(this.miUsuario).length > 0){
       //actualizar datos    
       this.usersService.updateUser(this.paramId,body).subscribe((data)=>{
-        /*
-        data={
-            "id": 25,
-            "first_name": "Lidia",
-            "last_name": "Herrera Villanueva",
-            "username": "lidia33",
-            "email": "mariadelcarmen.herreravillanueva@peticiones.online",
-            "image": "https://i.pravatar.cc/500?u=mariadelcarmen.herreravillanueva@peticiones.online"
-            };
-        */
+       
         if(data.error){
           Swal.fire('Ha habido un error', '', 'info');
 

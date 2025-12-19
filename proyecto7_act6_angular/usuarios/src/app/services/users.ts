@@ -19,7 +19,7 @@ export class Users {
     return firstValueFrom(this.httpClient.get<IUserResponse>(this.baseUrl));
   }
 
-  getUserById(id:number):Observable<IUser>{
+  getUserById(id:string):Observable<IUser>{
     return this.httpClient.get<IUser>(this.baseUrl+'/'+id);
   }
 
@@ -27,7 +27,7 @@ export class Users {
     let url='https://peticiones.online/api/users';
     return this.httpClient.post(url,body, {});
   }
-  deleteUser(id:number):Observable<any>{
+  deleteUser(id:string):Observable<any>{
     let url='https://peticiones.online/api/users/';
     return this.httpClient.delete(url + id,{});
   }
