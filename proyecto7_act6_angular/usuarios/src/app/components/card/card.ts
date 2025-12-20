@@ -20,7 +20,7 @@ export class Card {
   @Input() id:number=0;
   @Input() _id:string|undefined='';
 
-  eliminar2($event:any,id:any){
+  eliminar($event:any,id:any){
       $event.preventDefault();
       Swal.fire({
         title: '¿Estás seguro de eliminar el usuario?',
@@ -39,7 +39,7 @@ export class Card {
             if(data.error){
               Swal.fire('Ha habido un error', '', 'info');
             }else{
-              Swal.fire('Eliminado!', '', 'success');
+              Swal.fire('Eliminado!', data.first_name, 'success');
             }
           });
         }

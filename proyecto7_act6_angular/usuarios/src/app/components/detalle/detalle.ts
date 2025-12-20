@@ -38,7 +38,7 @@ export class Detalle {
     */
   }
 
-  eliminar2($event:any,id:string){
+  eliminar($event:any,id:string){
     $event.preventDefault();
     Swal.fire({
       title: '¿Estás seguro de eliminar el usuario?',
@@ -58,7 +58,7 @@ export class Detalle {
           if(data.error){
             Swal.fire('Ha habido un error', '', 'info');
           }else{
-            Swal.fire('Eliminado!', '', 'success');
+            Swal.fire('Eliminado!', data.first_name, 'success');
           }
         });
       }

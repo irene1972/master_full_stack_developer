@@ -84,13 +84,14 @@ export class Formulario {
     if(Object.keys(this.miUsuario).length > 0){
       //actualizar datos    
       this.usersService.updateUser(this.paramId,body).subscribe((data)=>{
-       
+        console.log(data);
+        console.log(body);
         if(data.error){
           Swal.fire('Ha habido un error', '', 'info');
 
         }else{
           this.miForm.reset();
-          Swal.fire('Actualizado!', '', 'success');       
+          Swal.fire('Actualizado!', body.nombre, 'success');       
         }
         
       });
@@ -105,7 +106,7 @@ export class Formulario {
           Swal.fire('Ha habido un error', '', 'info');
         }else{
           this.miForm.reset();
-          Swal.fire('Guardado!', '', 'success');      
+          Swal.fire('Guardado!', body.nombre, 'success');      
         }
       });
     }
