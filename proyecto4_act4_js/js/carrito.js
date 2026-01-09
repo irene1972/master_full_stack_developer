@@ -10,7 +10,131 @@ import {Carrito} from './ClaseCarrito.js'
   function inicializarDom(){
     //obtener carrito del local-storage
     const carritoString = localStorage.getItem('carritoAGoodShop');
-    const carritoObj=JSON.parse(carritoString);
+    console.log(carritoString);
+    if(carritoString==null | carritoString==='{"products":[]}'){
+      console.log('carrito vacío');
+      let carrito;
+      carrito=new Carrito();
+      async function obtenerDatosDeAPI() {
+      let datosJSON;
+      try {
+          const response = await fetch('http://localhost:3000/products');
+          const data = await response.json(); 
+          datosJSON = data;
+          console.log(datosJSON);
+          
+          return datosJSON; 
+      } catch (error) {
+          console.error('Error al obtener los datos:', error);
+      }
+      }
+
+    obtenerDatosDeAPI().then(data => {
+        console.log("Datos recibidos:", data);
+        const divResultado=document.querySelector('#resultado');
+        let textHtml='';
+        textHtml+=`<div class="contenedor">
+            <div class="info">Producto</div>
+            <div class="cantidad">Cantidad</div>
+            <div class="precio">Unidad</div>
+            <div class="total">Total</div>
+        </div>`;
+
+        data.products.forEach(prod =>{
+          textHtml+=`<div class="contenedor">
+                    <div class="info">
+                        <h1>${prod.title}</h1>
+                        <p>Ref: ${prod.SKU}</p>
+                    </div>
+                    <div class="cantidad">
+                        <p class="menos">-</p>
+                        <p class="qty">0</p>
+                        <p class="mas">+</p>
+                    </div>
+                    <div class="precio">
+                        <p>${prod.price} €</p>
+                    </div>
+                    <div class="total">
+                        <p>0 €</p>
+                    </div>
+                </div>`;
+        });
+
+        textHtml+=`<div class="resumen">
+                    <h2>Total</h2>
+                    
+                    <div class="tot">
+                        <p>TOTAL</p>
+                        <p class="tot">0 €</p>
+                    </div>
+                </div>`;
+        
+        divResultado.innerHTML=textHtml;
+        const divsMas=document.querySelectorAll('p.mas');
+        const divsMenos=document.querySelectorAll('p.menos');
+        //console.log(divsMas);
+        divsMas.forEach(elem=>{
+          //console.log(elem);
+          elem.addEventListener('click',function(){
+            const divParent=elem.parentElement.parentElement;
+            const divCantidad=divParent.querySelector('p.qty');
+            const contenidoReferencia=divParent.querySelector('div.info p').textContent;
+            const divPrice=divParent.querySelector('div.precio p');
+            const divTotal=divParent.querySelector('div.total p');
+            const longitud=divPrice.textContent.length;
+            const precio=Number(divPrice.textContent.substring(0,longitud-2));
+            let cantidad=divCantidad.textContent;
+            
+            if(cantidad==0){
+              //console.log('cero');
+              carrito.actualizaUnidadesPorPrimeraVez(contenidoReferencia.substring(5),1);
+              divCantidad.textContent=1;
+              divTotal.textContent=precio;
+
+              //lo guardo en local-storage
+              localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+
+            }else{
+              carrito.incrementaUnidades(contenidoReferencia.substring(5));
+              divCantidad.textContent=Number(cantidad)+1;
+              cantidad=divCantidad.textContent;
+              divTotal.textContent=Number(cantidad)*precio;
+
+              //lo guardo en local-storage
+              localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+            }
+            
+            
+          });
+
+        });
+
+        divsMenos.forEach(elem =>{
+          elem.addEventListener('click',function(){
+            const divParent2=elem.parentElement.parentElement;
+            const divCantidad2=divParent2.querySelector('p.qty');
+            const contenidoReferencia2=divParent2.querySelector('div.info p').textContent;
+            const divPrice2=divParent2.querySelector('div.precio p');
+            const divTotal2=divParent2.querySelector('div.total p');
+            const longitud2=divPrice2.textContent.length;
+            const precio2=Number(divPrice2.textContent.substring(0,longitud2-2));
+            let cantidad2=divCantidad2.textContent;
+
+            if(cantidad2>0){
+              carrito.decrementaUnidades(contenidoReferencia2.substring(5));
+              divCantidad2.textContent=Number(cantidad2)-1;
+              cantidad2=divCantidad2.textContent;
+              divTotal2.textContent=Number(cantidad2)*precio2;
+
+              //lo guardo en local-storage
+              localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+            }
+          });
+        });
+    });
+
+    }else{
+       const carritoObj=JSON.parse(carritoString);
 
     //pintar el número de elementos que contiene el carrito
     
@@ -150,6 +274,9 @@ import {Carrito} from './ClaseCarrito.js'
   
 
     
+    }
+
+   
 
   }
         

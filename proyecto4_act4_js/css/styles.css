@@ -232,6 +232,8 @@ div.tot{
 }
 p.tot{
   font-weight: 800;
+  width: 10rem;
+  text-align: center;
 }
 p.qty{
   border:1px solid black;
