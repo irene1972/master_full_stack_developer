@@ -22,6 +22,21 @@ export class Carrito{
 
         }
 
+        incrementaUnidades(sku){
+            this.products.forEach(producto=>{
+                if(producto.SKU===sku){
+                    producto.qty=Number(producto.qty)+1;
+                }
+            });
+
+        }
+        decrementaUnidades(sku){
+            this.products.forEach(producto=>{
+                if(producto.SKU===sku){
+                    producto.qty-=1;
+                }
+            });
+        }
         obtenerInformacionProducto(sku){
             const info=this.products.filter(producto=>producto.SKU===sku);
             return info;

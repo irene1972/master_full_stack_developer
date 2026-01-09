@@ -56,48 +56,16 @@ import {Carrito} from './ClaseCarrito.js'
   const parrafoTotal=contenedor.querySelector('div.total p');
 
   parrafoMas.addEventListener('click', () => {
-    carrito.incrementaUnidades(producto.SKU);
+    producto.qty++;
     parrafoQty.textContent=producto.qty;
     parrafoTotal.textContent=producto.qty*producto.price;
-
-    //actualizamos el total
-    const divsInformacion=document.querySelectorAll('div.informacion');
-    
-    divsInformacion.forEach(info=>{
-      const ref=info.querySelector('p').textContent;
-      const total=info.querySelector('p.price');
-      
-      if(ref===producto.title){
-        total.textContent=producto.qty*producto.price;
-      }
-    });
-
-    const divTot=document.querySelector('p.tot');
-    let total=carrito.obtenerCarrito()[2].toFixed(2);
-    divTot.textContent=total;
-
   });
 
   parrafoMenos.addEventListener('click', () => {
     if (producto.qty > 0) {
-      carrito.decrementaUnidades(producto.SKU);
+      producto.qty--;
       parrafoQty.textContent=producto.qty;
       parrafoTotal.textContent=producto.qty*producto.price;
-
-      //actualizamos el total
-      const divsInformacion=document.querySelectorAll('div.informacion');
-      
-      divsInformacion.forEach(info=>{
-      const ref=info.querySelector('p').textContent;
-      const total=info.querySelector('p.price');
-      
-      if(ref===producto.title){
-        total.textContent=producto.qty*producto.price;
-      }
-    });
-    const divTot=document.querySelector('p.tot');
-    let total=carrito.obtenerCarrito()[2].toFixed(2);
-    divTot.textContent=total;
     }
   });
 
@@ -123,7 +91,7 @@ import {Carrito} from './ClaseCarrito.js'
           divProds.innerHTML+=`
                         <div class='informacion'>
                             <p class='informacion'>${producto.title}</p>
-                            <p class='price'>${(producto.price * producto.qty).toFixed(2)} €</p>
+                            <p>${(producto.price * producto.qty).toFixed(2)} €</p>
                         </div>
                       `;
         }

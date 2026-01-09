@@ -153,11 +153,11 @@ span.capacidad{
         top:1rem;
         
       }
-.cantidad{
+.contenedor{
   border-bottom: 1px solid black;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
-.cantidad:last-child{
+.contenedor:last-child{
   border-bottom: none;
 }
 .input-number{
@@ -171,10 +171,73 @@ span.capacidad{
   font-weight: bold;
   padding: 1rem;
 }
-.total{
-  background-color: beige;
-}
 
+.contenedor{
+  display:flex;
+  align-items: center;
+  text-align: center;
+  gap:4rem;
+  padding: 0;
+  
+}
+.contenedor h1{
+  font-size: 1rem;
+}
+.contenedor .info{
+  width: 10rem;
+  text-align: left;
+}
+.contenedor .cantidad{
+  width: 10rem;
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+}
+.menos:hover,.mas:hover{
+  cursor:pointer;
+}
+.contenedor .precio{
+  width: 6rem;
+  font-size: 1rem;
+  font-weight: 400;
+}
+.contenedor .total{
+  width: 6rem;
+}
+.resumen{
+  background-color: rgb(223, 212, 212);
+}
+.tabla{
+  position: relative;
+}
+.resumen{
+  position: absolute;
+  top:0;
+  right:0;
+  padding: 1rem;
+}
+.prod{
+  flex-direction: column;
+
+}
+div.informacion, div.tot{
+  display: flex;
+  justify-content: space-between;
+}
+p.informacion{
+  width: 10rem;
+}
+div.tot{
+  border-top: 1px solid black;
+}
+p.tot{
+  font-weight: 800;
+}
+p.qty{
+  border:1px solid black;
+  padding: 1rem;
+  border-radius: 5px;
+}
 @media (min-width: 768px) {
       .layout {
         display:grid;
