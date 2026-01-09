@@ -57,6 +57,10 @@ import {Carrito} from './ClaseCarrito.js'
 
   parrafoMas.addEventListener('click', () => {
     carrito.incrementaUnidades(producto.SKU);
+
+    //lo guardo en local-storage
+    localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+
     parrafoQty.textContent=producto.qty;
     parrafoTotal.textContent=producto.qty*producto.price;
 
@@ -81,6 +85,10 @@ import {Carrito} from './ClaseCarrito.js'
   parrafoMenos.addEventListener('click', () => {
     if (producto.qty > 0) {
       carrito.decrementaUnidades(producto.SKU);
+
+      //lo guardo en local-storage
+      localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+
       parrafoQty.textContent=producto.qty;
       parrafoTotal.textContent=producto.qty*producto.price;
 
