@@ -1,47 +1,47 @@
-import {Carrito} from './ClaseCarrito.js'
+import { Carrito } from './ClaseCarrito.js'
 
-(()=>{
+(() => {
 
-  document.addEventListener('DOMContentLoaded',inicializarDom);
+  document.addEventListener('DOMContentLoaded', inicializarDom);
 
-  const div=document.getElementById('resultado');
-  const parrafo=document.querySelector('.contenedor-carrito p');
+  const div = document.getElementById('resultado');
+  const parrafo = document.querySelector('.contenedor-carrito p');
 
-  function inicializarDom(){
+  function inicializarDom() {
     //obtener carrito del local-storage
     const carritoString = localStorage.getItem('carritoAGoodShop');
-    //console.log(carritoString);
-    if(carritoString==null | carritoString==='{"products":[]}'){
+    //si el acarrito está vacío
+    if (carritoString == null | carritoString === '{"products":[]}') {
       //console.log('carrito vacío');
       let carrito;
-      carrito=new Carrito();
+      carrito = new Carrito();
       async function obtenerDatosDeAPI() {
-      let datosJSON;
-      try {
+        let datosJSON;
+        try {
           const response = await fetch('http://localhost:3000/products');
-          const data = await response.json(); 
+          const data = await response.json();
           datosJSON = data;
           //console.log(datosJSON);
-          
-          return datosJSON; 
-      } catch (error) {
+
+          return datosJSON;
+        } catch (error) {
           console.error('Error al obtener los datos:', error);
-      }
+        }
       }
 
-    obtenerDatosDeAPI().then(data => {
+      obtenerDatosDeAPI().then(data => {
         //console.log("Datos recibidos:", data);
-        const divResultado=document.querySelector('#resultado');
-        let textHtml='';
-        textHtml+=`<div class="contenedor">
+        const divResultado = document.querySelector('#resultado');
+        let textHtml = '';
+        textHtml += `<div class="contenedor">
             <div class="info">Producto</div>
             <div class="cantidad">Cantidad</div>
             <div class="precio">Unidad</div>
             <div class="total">Total</div>
         </div>`;
 
-        data.products.forEach(prod =>{
-          textHtml+=`<div class="contenedor">
+        data.products.forEach(prod => {
+          textHtml += `<div class="contenedor">
                     <div class="info">
                         <h2>${prod.title}</h2>
                         <p>Ref: ${prod.SKU}</p>
@@ -60,7 +60,7 @@ import {Carrito} from './ClaseCarrito.js'
                 </div>`;
         });
 
-        textHtml+=`<div class="resumen">
+        textHtml += `<div class="resumen">
                     <h2>Total</h2>
                     <div class="prod">
                     </div>
@@ -69,40 +69,40 @@ import {Carrito} from './ClaseCarrito.js'
                         <p class="tot">0 €</p>
                     </div>
                 </div>`;
-        
-        divResultado.innerHTML=textHtml;
-        const divsMas=document.querySelectorAll('p.mas');
-        const divsMenos=document.querySelectorAll('p.menos');
+
+        divResultado.innerHTML = textHtml;
+        const divsMas = document.querySelectorAll('p.mas');
+        const divsMenos = document.querySelectorAll('p.menos');
         //console.log(divsMas);
-        divsMas.forEach(elem=>{
+        divsMas.forEach(elem => {
           //console.log(elem);
-          elem.addEventListener('click',function(){
-            const divProd=document.querySelector('div.prod');
-            const divParent=elem.parentElement.parentElement;
-            const divTitle=divParent.querySelector('div.info h2');
-            const divCantidad=divParent.querySelector('p.qty');
-            const contenidoReferencia=divParent.querySelector('div.info p').textContent;
-            const divPrice=divParent.querySelector('div.precio p');
-            const divTotal=divParent.querySelector('div.total p');
-            const longitud=divPrice.textContent.length;
-            const precio=Number(divPrice.textContent.substring(0,longitud-2));
-            let cantidad=divCantidad.textContent;
-            
-            if(cantidad==0){
+          elem.addEventListener('click', function () {
+            const divProd = document.querySelector('div.prod');
+            const divParent = elem.parentElement.parentElement;
+            const divTitle = divParent.querySelector('div.info h2');
+            const divCantidad = divParent.querySelector('p.qty');
+            const contenidoReferencia = divParent.querySelector('div.info p').textContent;
+            const divPrice = divParent.querySelector('div.precio p');
+            const divTotal = divParent.querySelector('div.total p');
+            const longitud = divPrice.textContent.length;
+            const precio = Number(divPrice.textContent.substring(0, longitud - 2));
+            let cantidad = divCantidad.textContent;
+
+            if (cantidad == 0) {
               //console.log('cero');
-              carrito.actualizaUnidadesPorPrimeraVez(contenidoReferencia.substring(5),1);
-              divCantidad.textContent=1;
-              divTotal.textContent=precio;
+              carrito.actualizaUnidadesPorPrimeraVez(contenidoReferencia.substring(5), 1);
+              divCantidad.textContent = 1;
+              divTotal.textContent = precio;
 
               //actualizar total
-              const divInformacion=document.createElement('div');
+              const divInformacion = document.createElement('div');
               divInformacion.classList.add('informacion');
-              const parrafoInformacion=document.createElement('p');
+              const parrafoInformacion = document.createElement('p');
               parrafoInformacion.classList.add('informacion');
-              parrafoInformacion.textContent=divTitle.textContent;
-              const parrafoPrice=document.createElement('p');
+              parrafoInformacion.textContent = divTitle.textContent;
+              const parrafoPrice = document.createElement('p');
               parrafoPrice.classList.add('price');
-              parrafoPrice.textContent=divTotal.textContent;
+              parrafoPrice.textContent = divTotal.textContent;
 
               divInformacion.appendChild(parrafoInformacion);
               divInformacion.appendChild(parrafoPrice);
@@ -115,22 +115,22 @@ import {Carrito} from './ClaseCarrito.js'
               //lo guardo en local-storage
               localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
 
-            }else{
+            } else {
               carrito.incrementaUnidades(contenidoReferencia.substring(5));
-              divCantidad.textContent=Number(cantidad)+1;
-              cantidad=divCantidad.textContent;
-              divTotal.textContent=Number(cantidad)*precio;
+              divCantidad.textContent = Number(cantidad) + 1;
+              cantidad = divCantidad.textContent;
+              divTotal.textContent = Number(cantidad) * precio;
 
               //actualizar total
-              const divsInfo=document.querySelectorAll('div.informacion');
+              const divsInfo = document.querySelectorAll('div.informacion');
               //console.log(divsInfo[0]);
-              divsInfo.forEach(divInfo=>{
+              divsInfo.forEach(divInfo => {
                 //console.log(divInfo.querySelector('p.informacion'));
                 //console.log(divTitle.textContent);
-                if(divInfo.querySelector('p.informacion').textContent===divTitle.textContent){
+                if (divInfo.querySelector('p.informacion').textContent === divTitle.textContent) {
                   //console.log('actualizamos el total');
-                  const divPrecio=divInfo.querySelector('p.price');
-                  divPrecio.textContent=divTotal.textContent;
+                  const divPrecio = divInfo.querySelector('p.price');
+                  divPrecio.textContent = divTotal.textContent;
                 }
               });
 
@@ -138,82 +138,83 @@ import {Carrito} from './ClaseCarrito.js'
               localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
             }
 
-            let sumatorio=0;
-            const arrayParrafoSubtotales=document.querySelectorAll('p.price');
-            arrayParrafoSubtotales.forEach(parrafoSubtotal=>{
-              sumatorio+=Number(parrafoSubtotal.textContent);
-              console.log(sumatorio);
+            let sumatorio = 0;
+            const arrayParrafoSubtotales = document.querySelectorAll('p.price');
+            arrayParrafoSubtotales.forEach(parrafoSubtotal => {
+              sumatorio += Number(parrafoSubtotal.textContent);
+              //console.log(sumatorio);
 
             });
-            document.querySelector('p.tot').textContent=sumatorio;
-            
+            document.querySelector('p.tot').textContent = sumatorio;
+
           });
 
         });
 
-        divsMenos.forEach(elem =>{
-          elem.addEventListener('click',function(){
-            const divParent2=elem.parentElement.parentElement;
-            const divTitle2=divParent2.querySelector('div.info h2');
-            const divCantidad2=divParent2.querySelector('p.qty');
-            const contenidoReferencia2=divParent2.querySelector('div.info p').textContent;
-            const divPrice2=divParent2.querySelector('div.precio p');
-            const divTotal2=divParent2.querySelector('div.total p');
-            const longitud2=divPrice2.textContent.length;
-            const precio2=Number(divPrice2.textContent.substring(0,longitud2-2));
-            let cantidad2=divCantidad2.textContent;
+        divsMenos.forEach(elem => {
+          elem.addEventListener('click', function () {
+            const divParent2 = elem.parentElement.parentElement;
+            const divTitle2 = divParent2.querySelector('div.info h2');
+            const divCantidad2 = divParent2.querySelector('p.qty');
+            const contenidoReferencia2 = divParent2.querySelector('div.info p').textContent;
+            const divPrice2 = divParent2.querySelector('div.precio p');
+            const divTotal2 = divParent2.querySelector('div.total p');
+            const longitud2 = divPrice2.textContent.length;
+            const precio2 = Number(divPrice2.textContent.substring(0, longitud2 - 2));
+            let cantidad2 = divCantidad2.textContent;
 
-            if(cantidad2>0){
+            if (cantidad2 > 0) {
               carrito.decrementaUnidades(contenidoReferencia2.substring(5));
-              divCantidad2.textContent=Number(cantidad2)-1;
-              cantidad2=divCantidad2.textContent;
-              divTotal2.textContent=Number(cantidad2)*precio2;
+              divCantidad2.textContent = Number(cantidad2) - 1;
+              cantidad2 = divCantidad2.textContent;
+              divTotal2.textContent = Number(cantidad2) * precio2;
 
               //actualizamos el total
-              const divsInformacion=document.querySelectorAll('div.informacion');
-              divsInformacion.forEach(divInfo=>{
+              const divsInformacion = document.querySelectorAll('div.informacion');
+              divsInformacion.forEach(divInfo => {
                 //console.log(divInfo.querySelector('p.informacion'));
                 //console.log(divTitle2.textContent);
-                if(divInfo.querySelector('p.informacion').textContent===divTitle2.textContent){
+                if (divInfo.querySelector('p.informacion').textContent === divTitle2.textContent) {
                   //console.log('actualizar');
                   //console.log(cantidad2);
-                  if(cantidad2==0){
+                  if (cantidad2 == 0) {
                     divInfo.remove();
-                  }else{
-                    divInfo.querySelector('p.price').textContent=divTotal2.textContent;
+                  } else {
+                    divInfo.querySelector('p.price').textContent = divTotal2.textContent;
                   }
-                  
+
                 }
               });
 
               //lo guardo en local-storage
               localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
             }
-            
-            let sumatorio=0;
-            const arrayParrafoSubtotales=document.querySelectorAll('p.price');
-            arrayParrafoSubtotales.forEach(parrafoSubtotal=>{
-              sumatorio+=Number(parrafoSubtotal.textContent);
-              console.log(sumatorio);
+
+            let sumatorio = 0;
+            const arrayParrafoSubtotales = document.querySelectorAll('p.price');
+            arrayParrafoSubtotales.forEach(parrafoSubtotal => {
+              sumatorio += Number(parrafoSubtotal.textContent);
+              //console.log(sumatorio);
 
             });
-            document.querySelector('p.tot').textContent=sumatorio;
+            document.querySelector('p.tot').textContent = sumatorio;
 
           });
         });
-    });
+      });
 
-    }else{
-       const carritoObj=JSON.parse(carritoString);
+    } else {
+      //si el carrito está lleno
+      const carritoObj = JSON.parse(carritoString);
 
-    //pintar el número de elementos que contiene el carrito
-    
-    const carrito=new Carrito(carritoObj.products);
-    
-    parrafo.textContent=carrito.products.lenth;
+      //pintar el número de elementos que contiene el carrito
 
-    //pintar el contenido del carrito
-    div.innerHTML+=`
+      const carrito = new Carrito(carritoObj.products);
+
+      parrafo.textContent = carrito.products.lenth;
+
+      //pintar el contenido del carrito
+      div.innerHTML += `
                     <div class='contenedor'>
                       <div class='info'>Producto</div>
                       <div class='cantidad'>Cantidad</div>
@@ -221,12 +222,12 @@ import {Carrito} from './ClaseCarrito.js'
                       <div class='total'>Total</div>
                     </div>
                     `;
-    carrito.products.forEach(producto => {
+      carrito.products.forEach(producto => {
 
-  const contenedor = document.createElement('div');
-  contenedor.classList.add('contenedor');
+        const contenedor = document.createElement('div');
+        contenedor.classList.add('contenedor');
 
-  contenedor.innerHTML = `
+        contenedor.innerHTML = `
     <div class='info'>
       <h1>${producto.title}</h1>
       <p>Ref: ${producto.SKU}</p>
@@ -244,111 +245,149 @@ import {Carrito} from './ClaseCarrito.js'
     </div>
   `;
 
-  const parrafoMas = contenedor.querySelector('.mas');
-  const parrafoMenos = contenedor.querySelector('.menos');
-  const parrafoQty = contenedor.querySelector('.qty');
-  const parrafoTotal=contenedor.querySelector('div.total p');
+        const parrafoMas = contenedor.querySelector('.mas');
+        const parrafoMenos = contenedor.querySelector('.menos');
+        const parrafoQty = contenedor.querySelector('.qty');
+        const parrafoTotal = contenedor.querySelector('div.total p');
 
-  parrafoMas.addEventListener('click', () => {
-    carrito.incrementaUnidades(producto.SKU);
+        parrafoMas.addEventListener('click', () => {
+          carrito.incrementaUnidades(producto.SKU);
 
-    //lo guardo en local-storage
-    localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+          //lo guardo en local-storage
+          localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
 
-    parrafoQty.textContent=producto.qty;
-    parrafoTotal.textContent=producto.qty*producto.price;
+          parrafoQty.textContent = producto.qty;
+          parrafoTotal.textContent = producto.qty * producto.price;
 
-    //actualizamos el total
-    const divsInformacion=document.querySelectorAll('div.informacion');
-    
-    divsInformacion.forEach(info=>{
-      const ref=info.querySelector('p').textContent;
-      const total=info.querySelector('p.price');
-      
-      if(ref===producto.title){
-        total.textContent=producto.qty*producto.price;
-      }
-    });
+          //actualizamos el total
+          const divsInformacion = document.querySelectorAll('div.informacion');
 
-    const divTot=document.querySelector('p.tot');
-    let total=carrito.obtenerCarrito()[2].toFixed(2);
-    divTot.textContent=total;
+          if(producto.qty==1){
+            //creamos una línea de subtotales
+            const dProd=document.querySelector('div.prod');
 
-  });
+            const dInf=document.createElement('div');
+            dInf.classList.add('informacion');
 
-  parrafoMenos.addEventListener('click', () => {
-    if (producto.qty > 0) {
-      carrito.decrementaUnidades(producto.SKU);
+            const pInf=document.createElement('p');
+            pInf.classList.add('informacion');
+            pInf.textContent=producto.title;
 
-      //lo guardo en local-storage
-      localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+            const pPrice=document.createElement('p');
+            pPrice.classList.add('price');
+            pPrice.textContent=producto.price;
 
-      parrafoQty.textContent=producto.qty;
-      parrafoTotal.textContent=producto.qty*producto.price;
+            dInf.appendChild(pInf);
+            dInf.appendChild(pPrice);
 
-      //actualizamos el total
-      const divsInformacion=document.querySelectorAll('div.informacion');
-      
-      divsInformacion.forEach(info=>{
-      const ref=info.querySelector('p').textContent;
-      const total=info.querySelector('p.price');
-      
-      if(ref===producto.title){
-        total.textContent=producto.qty*producto.price;
-      }
-    });
-    const divTot=document.querySelector('p.tot');
-    let total=carrito.obtenerCarrito()[2].toFixed(2);
-    divTot.textContent=total;
-    }
-  });
+            dProd.appendChild(dInf);
+            
+          }else{
+            //actualizamos la línea
+            divsInformacion.forEach(info => {
+            const ref = info.querySelector('p')?.textContent;
+              const total = info.querySelector('p.price');
 
-  div.appendChild(contenedor);
-});
+              if (ref === producto.title) {
+                total.textContent = producto.qty * producto.price;
+              }
+            
+          });
+          }
 
-    let prods=carrito.obtenerCarrito()[1];
-    let total=carrito.obtenerCarrito()[2].toFixed(2);
+          
 
-    const divResumen= document.createElement('div');
-    divResumen.classList.add('resumen');
+          const divTot = document.querySelector('p.tot');
+          let total = carrito.obtenerCarrito()[2].toFixed(2);
+          divTot.textContent = total;
 
-    const divH2=document.createElement('h2');
-    divH2.textContent='Total';
-    divResumen.appendChild(divH2);
+        });
 
-    const divProds=document.createElement('div');
-    divProds.classList.add('prod');
-    divResumen.appendChild(divProds);
+        parrafoMenos.addEventListener('click', () => {
+          if (producto.qty > 0) {
+            carrito.decrementaUnidades(producto.SKU);
 
-    carrito.products.forEach(producto=>{ 
-        if(producto.qty > 0){
-          divProds.innerHTML+=`
+            //lo guardo en local-storage
+            localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
+
+            parrafoQty.textContent = producto.qty;
+            parrafoTotal.textContent = producto.qty * producto.price;
+
+            //actualizamos el total
+            const divsInformacion = document.querySelectorAll('div.informacion');
+
+            divsInformacion.forEach(info => {
+              const parrafoReferencia=info.querySelector('p');
+              const ref = parrafoReferencia?.textContent;
+              const total = info.querySelector('p.price');
+
+              if (ref === producto.title) {
+                total.textContent = producto.qty * producto.price;
+              }
+              //console.log(producto.qty);
+              //console.log(parrafoReferencia);
+              if(producto.qty == 0){
+                if(ref===producto.title){
+                  parrafoReferencia.remove();
+                total.remove();
+                }
+              }
+            });
+            
+            const divTot = document.querySelector('p.tot');
+            let total = carrito.obtenerCarrito()[2].toFixed(2);
+            divTot.textContent = total;
+
+            
+          }
+        });
+
+        div.appendChild(contenedor);
+      });
+
+      let prods = carrito.obtenerCarrito()[1];
+      let total = carrito.obtenerCarrito()[2].toFixed(2);
+
+      const divResumen = document.createElement('div');
+      divResumen.classList.add('resumen');
+
+      const divH2 = document.createElement('h2');
+      divH2.textContent = 'Total';
+      divResumen.appendChild(divH2);
+
+      const divProds = document.createElement('div');
+      divProds.classList.add('prod');
+      divResumen.appendChild(divProds);
+
+      carrito.products.forEach(producto => {
+        if (producto.qty > 0) {
+          divProds.innerHTML += `
                         <div class='informacion'>
                             <p class='informacion'>${producto.title}</p>
                             <p class='price'>${(producto.price * producto.qty).toFixed(2)} €</p>
                         </div>
                       `;
         }
-        
-        });
 
-    const divTot=document.createElement('div');
-    divTot.classList.add('tot');
-    divTot.innerHTML=`
+      });
+
+      const divTot = document.createElement('div');
+      divTot.classList.add('tot');
+      divTot.innerHTML = `
                           <p>TOTAL</p>
                           <p class='tot'>${total} €</p>`;
-    divResumen.appendChild(divTot);
+      divResumen.appendChild(divTot);
 
-    div.appendChild(divResumen);
+      div.appendChild(divResumen);
 
-  
 
-    
+
+
     }
 
-   
+
 
   }
-        
+
 
 })()
