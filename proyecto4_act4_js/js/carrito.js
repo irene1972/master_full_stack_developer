@@ -229,7 +229,7 @@ import { Carrito } from './ClaseCarrito.js'
 
         contenedor.innerHTML = `
     <div class='info'>
-      <h1>${producto.title}</h1>
+      <h2>${producto.title}</h2>
       <p>Ref: ${producto.SKU}</p>
     </div>
     <div class='cantidad'>
@@ -257,7 +257,7 @@ import { Carrito } from './ClaseCarrito.js'
           localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
 
           parrafoQty.textContent = producto.qty;
-          parrafoTotal.textContent = producto.qty * producto.price;
+          parrafoTotal.textContent = (producto.qty * producto.price)+' €';
 
           //actualizamos el total
           const divsInformacion = document.querySelectorAll('div.informacion');
@@ -275,7 +275,7 @@ import { Carrito } from './ClaseCarrito.js'
 
             const pPrice=document.createElement('p');
             pPrice.classList.add('price');
-            pPrice.textContent=producto.price;
+            pPrice.textContent=producto.price+' €';
 
             dInf.appendChild(pInf);
             dInf.appendChild(pPrice);
@@ -289,7 +289,7 @@ import { Carrito } from './ClaseCarrito.js'
               const total = info.querySelector('p.price');
 
               if (ref === producto.title) {
-                total.textContent = producto.qty * producto.price;
+                total.textContent = (producto.qty * producto.price)+' €';
               }
             
           });
@@ -311,7 +311,7 @@ import { Carrito } from './ClaseCarrito.js'
             localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
 
             parrafoQty.textContent = producto.qty;
-            parrafoTotal.textContent = producto.qty * producto.price;
+            parrafoTotal.textContent = (producto.qty * producto.price)+' €';
 
             //actualizamos el total
             const divsInformacion = document.querySelectorAll('div.informacion');
@@ -322,7 +322,7 @@ import { Carrito } from './ClaseCarrito.js'
               const total = info.querySelector('p.price');
 
               if (ref === producto.title) {
-                total.textContent = producto.qty * producto.price;
+                total.textContent = (producto.qty * producto.price)+' €';
               }
               //console.log(producto.qty);
               //console.log(parrafoReferencia);
