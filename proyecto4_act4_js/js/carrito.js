@@ -10,9 +10,9 @@ import {Carrito} from './ClaseCarrito.js'
   function inicializarDom(){
     //obtener carrito del local-storage
     const carritoString = localStorage.getItem('carritoAGoodShop');
-    console.log(carritoString);
+    //console.log(carritoString);
     if(carritoString==null | carritoString==='{"products":[]}'){
-      console.log('carrito vacío');
+      //console.log('carrito vacío');
       let carrito;
       carrito=new Carrito();
       async function obtenerDatosDeAPI() {
@@ -21,7 +21,7 @@ import {Carrito} from './ClaseCarrito.js'
           const response = await fetch('http://localhost:3000/products');
           const data = await response.json(); 
           datosJSON = data;
-          console.log(datosJSON);
+          //console.log(datosJSON);
           
           return datosJSON; 
       } catch (error) {
@@ -30,7 +30,7 @@ import {Carrito} from './ClaseCarrito.js'
       }
 
     obtenerDatosDeAPI().then(data => {
-        console.log("Datos recibidos:", data);
+        //console.log("Datos recibidos:", data);
         const divResultado=document.querySelector('#resultado');
         let textHtml='';
         textHtml+=`<div class="contenedor">
@@ -43,7 +43,7 @@ import {Carrito} from './ClaseCarrito.js'
         data.products.forEach(prod =>{
           textHtml+=`<div class="contenedor">
                     <div class="info">
-                        <h1>${prod.title}</h1>
+                        <h2>${prod.title}</h2>
                         <p>Ref: ${prod.SKU}</p>
                     </div>
                     <div class="cantidad">
@@ -62,7 +62,8 @@ import {Carrito} from './ClaseCarrito.js'
 
         textHtml+=`<div class="resumen">
                     <h2>Total</h2>
-                    
+                    <div class="prod">
+                    </div>
                     <div class="tot">
                         <p>TOTAL</p>
                         <p class="tot">0 €</p>
@@ -76,7 +77,9 @@ import {Carrito} from './ClaseCarrito.js'
         divsMas.forEach(elem=>{
           //console.log(elem);
           elem.addEventListener('click',function(){
+            const divProd=document.querySelector('div.prod');
             const divParent=elem.parentElement.parentElement;
+            const divTitle=divParent.querySelector('div.info h2');
             const divCantidad=divParent.querySelector('p.qty');
             const contenidoReferencia=divParent.querySelector('div.info p').textContent;
             const divPrice=divParent.querySelector('div.precio p');
@@ -91,6 +94,24 @@ import {Carrito} from './ClaseCarrito.js'
               divCantidad.textContent=1;
               divTotal.textContent=precio;
 
+              //actualizar total
+              const divInformacion=document.createElement('div');
+              divInformacion.classList.add('informacion');
+              const parrafoInformacion=document.createElement('p');
+              parrafoInformacion.classList.add('informacion');
+              parrafoInformacion.textContent=divTitle.textContent;
+              const parrafoPrice=document.createElement('p');
+              parrafoPrice.classList.add('price');
+              parrafoPrice.textContent=divTotal.textContent;
+
+              divInformacion.appendChild(parrafoInformacion);
+              divInformacion.appendChild(parrafoPrice);
+
+              divProd.appendChild(divInformacion);
+
+              carrito.obtenerCarrito();
+              //console.log(carrito.obtenerCarrito());
+
               //lo guardo en local-storage
               localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
 
@@ -100,10 +121,31 @@ import {Carrito} from './ClaseCarrito.js'
               cantidad=divCantidad.textContent;
               divTotal.textContent=Number(cantidad)*precio;
 
+              //actualizar total
+              const divsInfo=document.querySelectorAll('div.informacion');
+              //console.log(divsInfo[0]);
+              divsInfo.forEach(divInfo=>{
+                //console.log(divInfo.querySelector('p.informacion'));
+                //console.log(divTitle.textContent);
+                if(divInfo.querySelector('p.informacion').textContent===divTitle.textContent){
+                  //console.log('actualizamos el total');
+                  const divPrecio=divInfo.querySelector('p.price');
+                  divPrecio.textContent=divTotal.textContent;
+                }
+              });
+
               //lo guardo en local-storage
               localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
             }
-            
+
+            let sumatorio=0;
+            const arrayParrafoSubtotales=document.querySelectorAll('p.price');
+            arrayParrafoSubtotales.forEach(parrafoSubtotal=>{
+              sumatorio+=Number(parrafoSubtotal.textContent);
+              console.log(sumatorio);
+
+            });
+            document.querySelector('p.tot').textContent=sumatorio;
             
           });
 
@@ -112,6 +154,7 @@ import {Carrito} from './ClaseCarrito.js'
         divsMenos.forEach(elem =>{
           elem.addEventListener('click',function(){
             const divParent2=elem.parentElement.parentElement;
+            const divTitle2=divParent2.querySelector('div.info h2');
             const divCantidad2=divParent2.querySelector('p.qty');
             const contenidoReferencia2=divParent2.querySelector('div.info p').textContent;
             const divPrice2=divParent2.querySelector('div.precio p');
@@ -126,9 +169,36 @@ import {Carrito} from './ClaseCarrito.js'
               cantidad2=divCantidad2.textContent;
               divTotal2.textContent=Number(cantidad2)*precio2;
 
+              //actualizamos el total
+              const divsInformacion=document.querySelectorAll('div.informacion');
+              divsInformacion.forEach(divInfo=>{
+                //console.log(divInfo.querySelector('p.informacion'));
+                //console.log(divTitle2.textContent);
+                if(divInfo.querySelector('p.informacion').textContent===divTitle2.textContent){
+                  //console.log('actualizar');
+                  //console.log(cantidad2);
+                  if(cantidad2==0){
+                    divInfo.remove();
+                  }else{
+                    divInfo.querySelector('p.price').textContent=divTotal2.textContent;
+                  }
+                  
+                }
+              });
+
               //lo guardo en local-storage
               localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
             }
+            
+            let sumatorio=0;
+            const arrayParrafoSubtotales=document.querySelectorAll('p.price');
+            arrayParrafoSubtotales.forEach(parrafoSubtotal=>{
+              sumatorio+=Number(parrafoSubtotal.textContent);
+              console.log(sumatorio);
+
+            });
+            document.querySelector('p.tot').textContent=sumatorio;
+
           });
         });
     });
