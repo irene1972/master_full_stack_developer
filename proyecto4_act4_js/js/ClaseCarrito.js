@@ -38,6 +38,7 @@ export class Carrito{
             });
         }
         obtenerInformacionProducto(sku){
+            //console.log(this.products);
             const info=this.products.filter(producto=>producto.SKU===sku);
             return info;
         }
@@ -46,6 +47,8 @@ export class Carrito{
             const totalQty=this.products.reduce((acc,producto)=>acc+parseInt(producto.qty),0);
             const totalEuros=this.products.reduce((acc,producto)=>acc+(parseFloat(producto.price)*parseInt(producto.qty)),0);
             const arrayCarrito=[this.products,totalQty,totalEuros];
+            //console.log('irene4:');
+            //console.log(arrayCarrito);
             return arrayCarrito;
         }
         
