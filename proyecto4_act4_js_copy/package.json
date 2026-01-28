@@ -1,0 +1,15 @@
+{
+  "name": "agoodshop",
+  "version": "1.0.0",
+  "description": "Proyecto de una tienda con javascript",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "json-server --watch db.json"
+  },
+  "author": "Irene Olmos Gómez",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
+}
