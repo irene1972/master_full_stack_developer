@@ -30,8 +30,9 @@ import { Carrito } from './ClaseCarrito.js'
       }
 
       obtenerDatosDeAPI().then(data => {
-      
+
         carrito = new Carrito(data.products);
+        carrito.currency='€';
 
         const divResultado = document.querySelector('#resultado');
         let textHtml = '';
@@ -54,10 +55,10 @@ import { Carrito } from './ClaseCarrito.js'
                         <p class="mas">+</p>
                     </div>
                     <div class="precio">
-                        <p>${prod.price} €</p>
+                        <p>${prod.price} ${carrito.currency}</p>
                     </div>
                     <div class="total">
-                        <p>0 €</p>
+                        <p>0 ${carrito.currency}</p>
                     </div>
                 </div>`;
         });
@@ -68,7 +69,7 @@ import { Carrito } from './ClaseCarrito.js'
                     </div>
                     <div class="tot">
                         <p>TOTAL</p>
-                        <p class="tot">0 €</p>
+                        <p class="tot">0 ${carrito.currency}</p>
                     </div>
                 </div>`;
 
@@ -92,22 +93,22 @@ import { Carrito } from './ClaseCarrito.js'
 
             if (cantidad == 0) {
               carrito.actualizaUnidadesPorPrimeraVez(contenidoReferencia.substring(5), 1);
-              const infoProd=carrito.obtenerInformacionProducto(contenidoReferencia.substring(5))[0];
+              const infoProd = carrito.obtenerInformacionProducto(contenidoReferencia.substring(5))[0];
 
               //actualizar cantidad y total
               divCantidad.textContent = infoProd.qty;
-              divTotal.textContent = (infoProd.qty * parseFloat(infoProd.price)) + ' €';
+              divTotal.textContent = (infoProd.qty * parseFloat(infoProd.price)) + ' ' + carrito.currency;
 
               //actualizar resumen
               const divInformacion = document.createElement('div');
               divInformacion.classList.add('informacion');
-              divInformacion.id=infoProd.SKU;
+              divInformacion.id = infoProd.SKU;
               const parrafoInformacion = document.createElement('p');
               parrafoInformacion.classList.add('informacion');
               parrafoInformacion.textContent = infoProd.title;
               const parrafoPrice = document.createElement('p');
               parrafoPrice.classList.add('price');
-              parrafoPrice.textContent = (infoProd.qty * parseFloat(infoProd.price)) + ' €';
+              parrafoPrice.textContent = (infoProd.qty * parseFloat(infoProd.price)) + ' ' + carrito.currency;
 
               divInformacion.appendChild(parrafoInformacion);
               divInformacion.appendChild(parrafoPrice);
@@ -119,20 +120,20 @@ import { Carrito } from './ClaseCarrito.js'
 
             } else {
               carrito.incrementaUnidades(contenidoReferencia.substring(5));
-              const infoProd=carrito.obtenerInformacionProducto(contenidoReferencia.substring(5))[0];
-              
+              const infoProd = carrito.obtenerInformacionProducto(contenidoReferencia.substring(5))[0];
+
               //actualizar la cantidad y el total
               divCantidad.textContent = infoProd.qty;
-              divTotal.textContent = (infoProd.qty * parseFloat(infoProd.price)) + ' €';
+              divTotal.textContent = (infoProd.qty * parseFloat(infoProd.price)) + ' ' + carrito.currency;
 
               //actualizar resumen
               const divsInfo = document.querySelectorAll('div.informacion');
-            
+
               divsInfo.forEach(divInfo => {
                 if (divInfo.querySelector('p.informacion').textContent === divTitle.textContent) {
                   const divPrecio = divInfo.querySelector('p.price');
-                  const infoProd=carrito.obtenerInformacionProducto(divInfo.id)[0];
-                  divPrecio.textContent = (infoProd.qty * parseFloat(infoProd.price)) + ' €';
+                  const infoProd = carrito.obtenerInformacionProducto(divInfo.id)[0];
+                  divPrecio.textContent = (infoProd.qty * parseFloat(infoProd.price)) + ' ' + carrito.currency;
                 }
               });
 
@@ -140,12 +141,12 @@ import { Carrito } from './ClaseCarrito.js'
               localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
             }
 
-            document.querySelector('p.tot').textContent = carrito.obtenerCarrito()[2] + ' €';
+            document.querySelector('p.tot').textContent = carrito.obtenerCarrito()[2] + ' ' + carrito.currency;
 
           });
 
         });
-      
+
         divsMenos.forEach(elem => {
           elem.addEventListener('click', function () {
             const divParent2 = elem.parentElement.parentElement;
@@ -160,11 +161,11 @@ import { Carrito } from './ClaseCarrito.js'
 
             if (cantidad2 > 0) {
               carrito.decrementaUnidades(contenidoReferencia2.substring(5));
-              const infoProd=carrito.obtenerInformacionProducto(contenidoReferencia2.substring(5))[0];
+              const infoProd = carrito.obtenerInformacionProducto(contenidoReferencia2.substring(5))[0];
 
               //actualizamos el total
               divCantidad2.textContent = infoProd.qty;
-              divTotal2.textContent = (infoProd.qty * parseFloat(infoProd.price)) + ' €';
+              divTotal2.textContent = (infoProd.qty * parseFloat(infoProd.price)) + ' ' + carrito.currency;
 
               //actualizamos el resumen
               const divsInformacion = document.querySelectorAll('div.informacion');
@@ -173,8 +174,8 @@ import { Carrito } from './ClaseCarrito.js'
                   if (infoProd.qty == 0) {
                     divInfo.remove();
                   } else {
-                    const infoProd=carrito.obtenerInformacionProducto(divInfo.id)[0];
-                    divInfo.querySelector('p.price').textContent = (infoProd.qty * parseFloat(infoProd.price)) + ' €';
+                    const infoProd = carrito.obtenerInformacionProducto(divInfo.id)[0];
+                    divInfo.querySelector('p.price').textContent = (infoProd.qty * parseFloat(infoProd.price)) + ' ' + carrito.currency;
                   }
 
                 }
@@ -184,7 +185,7 @@ import { Carrito } from './ClaseCarrito.js'
               localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
             }
 
-            document.querySelector('p.tot').textContent = carrito.obtenerCarrito()[2];
+            document.querySelector('p.tot').textContent = carrito.obtenerCarrito()[2] + ' ' + carrito.currency;
 
           });
         });
@@ -197,6 +198,7 @@ import { Carrito } from './ClaseCarrito.js'
       //pintar el número de elementos que contiene el carrito
 
       const carrito = new Carrito(carritoObj.products);
+      carrito.currency='€';
 
       parrafo.textContent = carrito.products.lenth;
 
@@ -225,10 +227,10 @@ import { Carrito } from './ClaseCarrito.js'
       <p class='mas'>+</p>
     </div>
     <div class='precio'>
-      <p>${producto.price} €</p>
+      <p>${producto.price} ${carrito.currency}</p>
     </div>
     <div class='total'>
-      <p>${(producto.price * producto.qty).toFixed(2)} €</p>
+      <p>${(producto.price * producto.qty).toFixed(2)} ${carrito.currency}</p>
     </div>
   `;
 
@@ -238,14 +240,14 @@ import { Carrito } from './ClaseCarrito.js'
         const parrafoTotal = contenedor.querySelector('div.total p');
 
         parrafoMas.addEventListener('click', () => {
-          
+
           carrito.incrementaUnidades(producto.SKU);
 
           //lo guardo en local-storage
           localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
 
           parrafoQty.textContent = producto.qty;
-          parrafoTotal.textContent = (producto.qty * producto.price) + ' €';
+          parrafoTotal.textContent = (producto.qty * producto.price) + ' ' + carrito.currency;
 
           //actualizamos el total
           const divsInformacion = document.querySelectorAll('div.informacion');
@@ -263,7 +265,7 @@ import { Carrito } from './ClaseCarrito.js'
 
             const pPrice = document.createElement('p');
             pPrice.classList.add('price');
-            pPrice.textContent = producto.price + ' €';
+            pPrice.textContent = producto.price + ' ' + carrito.currency;
 
             dInf.appendChild(pInf);
             dInf.appendChild(pPrice);
@@ -277,7 +279,7 @@ import { Carrito } from './ClaseCarrito.js'
               const total = info.querySelector('p.price');
 
               if (ref === producto.title) {
-                total.textContent = (producto.qty * producto.price) + ' €';
+                total.textContent = (producto.qty * producto.price) + ' ' + carrito.currency;
               }
 
             });
@@ -287,7 +289,7 @@ import { Carrito } from './ClaseCarrito.js'
 
           const divTot = document.querySelector('p.tot');
           let total = carrito.obtenerCarrito()[2].toFixed(2);
-          divTot.textContent = total + ' €';
+          divTot.textContent = total + ' ' + carrito.currency;
 
         });
 
@@ -299,7 +301,7 @@ import { Carrito } from './ClaseCarrito.js'
             localStorage.setItem('carritoAGoodShop', JSON.stringify(carrito));
 
             parrafoQty.textContent = producto.qty;
-            parrafoTotal.textContent = (producto.qty * producto.price) + ' €';
+            parrafoTotal.textContent = (producto.qty * producto.price) + ' ' + carrito.currency;
 
             //actualizamos el total
             const divsInformacion = document.querySelectorAll('div.informacion');
@@ -310,7 +312,7 @@ import { Carrito } from './ClaseCarrito.js'
               const total = info.querySelector('p.price');
 
               if (ref === producto.title) {
-                total.textContent = (producto.qty * producto.price) + ' €';
+                total.textContent = (producto.qty * producto.price) + ' ' + carrito.currency;
               }
 
               if (producto.qty == 0) {
@@ -323,7 +325,7 @@ import { Carrito } from './ClaseCarrito.js'
 
             const divTot = document.querySelector('p.tot');
             let total = carrito.obtenerCarrito()[2].toFixed(2);
-            divTot.textContent = total + ' €';;
+            divTot.textContent = total + ' ' + carrito.currency;;
 
 
           }
@@ -351,7 +353,7 @@ import { Carrito } from './ClaseCarrito.js'
           divProds.innerHTML += `
                         <div class='informacion'>
                             <p class='informacion'>${producto.title}</p>
-                            <p class='price'>${(producto.price * producto.qty).toFixed(2)} €</p>
+                            <p class='price'>${(producto.price * producto.qty).toFixed(2)} ${carrito.currency}</p>
                         </div>
                       `;
         }
@@ -362,7 +364,7 @@ import { Carrito } from './ClaseCarrito.js'
       divTot.classList.add('tot');
       divTot.innerHTML = `
                           <p>TOTAL</p>
-                          <p class='tot'>${total} €</p>`;
+                          <p class='tot'>${total} ${carrito.currency}</p>`;
       divResumen.appendChild(divTot);
 
       div.appendChild(divResumen);
