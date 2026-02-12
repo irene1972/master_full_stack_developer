@@ -12,24 +12,12 @@ figure{
     max-width: 1200px;
 }
 h1,h2{
-    margin:1rem 0;
+    margin:1rem ;
 }
 .noticia{
     margin:1rem 0;
 }
-/*
-figure img{
-    width: 100%;
-    height: auto;
-    display: inline;
-}
-*/
 .exito{
     background-color: green;
-    color:white;
-}
-
-.error{
-    background-color: red;
     color:white;
 }
