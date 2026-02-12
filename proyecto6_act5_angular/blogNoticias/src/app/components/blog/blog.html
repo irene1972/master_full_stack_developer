@@ -19,6 +19,9 @@
         </div>
         <input type="submit" value="Enviar" [disabled]="!miFormulario.valid">
     </form>
+    @if(insertado){
+        <p class="exito">Se ha insertado la noticia correctamente</p>
+    }
 </section>
 <section class="contenedor">
     @for(post of misPosts; track post.titulo){

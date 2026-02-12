@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IPost } from '../../interfaces/ipost';
 import { Posts } from '../../services/posts';
@@ -13,11 +13,11 @@ import { Posts } from '../../services/posts';
 export class Blog {
   
   misPosts:IPost[]=[];
-
+  insertado:boolean=false;
   postsService=inject(Posts);
   miFormulario:FormGroup;
 
-  constructor(){
+  constructor(private cd: ChangeDetectorRef){
     this.miFormulario=new FormGroup({
       titulo:new FormControl('',[Validators.required]),
       imagen:new FormControl('',[Validators.required]),
@@ -33,12 +33,20 @@ export class Blog {
   }
 
   cargarDatos():void{
-    
+    let insertar;
     if(this.miFormulario.valid){
-      this.postsService.insert(this.miFormulario.value);
+      insertar=this.postsService.insert(this.miFormulario.value);
     }
-    
+    console.log(insertar);
     this.miFormulario.reset();
+
+    if(insertar){
+      this.insertado=true;
+      setTimeout(()=>{
+        this.insertado=false;
+        this.cd.detectChanges();
+      },3000);
+    }
 
   }
 
