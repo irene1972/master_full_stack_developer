@@ -5,6 +5,7 @@
     box-sizing: border-box;
 }
 body{
+    margin: 1rem;
     font-family:'Segoe UI, Tahoma, Geneva, Verdana, sans-serif';
     font-size: 1em;
 }
@@ -16,4 +17,12 @@ img{
 .contenedor{
     max-width: 1200px;
     margin:0 auto;
+}
+@media(max-width:600px){
+    section.contenedor-flex{
+        flex-direction: column;
+    }
+    nav{
+        margin-top: 1rem;
+    }
 }
