@@ -44,7 +44,7 @@ export class Blog {
       this.insertado=true;
       setTimeout(()=>{
         this.insertado=false;
-        this.cd.detectChanges();
+        this.cd.markForCheck();
       },3000);
     }
 
