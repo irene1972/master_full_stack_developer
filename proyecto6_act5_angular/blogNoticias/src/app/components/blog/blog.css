@@ -18,6 +18,7 @@ h1,h2{
     margin:1rem 0;
 }
 .exito{
+    padding: 1rem;
     background-color: green;
     color:white;
 }
