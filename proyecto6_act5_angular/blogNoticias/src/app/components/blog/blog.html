@@ -4,18 +4,38 @@
         <div>
             <label for="titulo">Titulo</label>
             <input type="text" id="titulo" placeholder="Ej: Inauguración Semana de la Proximidad" formControlName="titulo">
+            @if (titulo?.touched && titulo?.hasError('required')) {
+                <div class="text-danger">
+                    El titulo es obligatorio.
+                </div>
+                }
         </div>
         <div>
             <label for="imagen">Imagen</label>
             <input type="text" id="imagen" placeholder="Ej: /imgs/noticia3.webp" formControlName="imagen">
+            @if (imagen?.touched && imagen?.hasError('required')) {
+                <div class="text-danger">
+                    La imagen es obligatoria.
+                </div>
+                }
         </div>
         <div>
             <label for="noticia">Noticia</label>
             <textarea id="noticia" rows="10" formControlName="noticia"></textarea>
+            @if (noticia?.touched && noticia?.hasError('required')) {
+                <div class="text-danger">
+                    La noticia es obligatoria.
+                </div>
+                }
         </div>
         <div>
             <label for="fecha">Fecha</label>
             <input type="date" id="fecha" formControlName="fecha">
+            @if (fecha?.touched && fecha?.hasError('required')) {
+                <div class="text-danger">
+                    La fecha es obligatoria.
+                </div>
+                }
         </div>
         <input type="submit" value="Enviar" [disabled]="!miFormulario.valid">
     </form>

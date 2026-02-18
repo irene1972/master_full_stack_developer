@@ -5,47 +5,63 @@ import { Posts } from '../../services/posts';
 
 @Component({
   selector: 'app-blog',
-  standalone:true,
+  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './blog.html',
   styleUrl: './blog.css',
 })
 export class Blog {
-  
-  misPosts:IPost[]=[];
-  insertado:boolean=false;
-  postsService=inject(Posts);
-  miFormulario:FormGroup;
 
-  constructor(private cd: ChangeDetectorRef){
-    this.miFormulario=new FormGroup({
-      titulo:new FormControl('',[Validators.required]),
-      imagen:new FormControl('',[Validators.required]),
-      noticia:new FormControl('',[Validators.required]),
-      fecha:new FormControl('',[Validators.required])
-    },[]);
+  misPosts: IPost[] = [];
+  insertado: boolean = false;
+  postsService = inject(Posts);
+  miFormulario: FormGroup;
+
+  constructor(private cd: ChangeDetectorRef) {
+    this.miFormulario = new FormGroup({
+      titulo: new FormControl('', [Validators.required]),
+      imagen: new FormControl('', [Validators.required]),
+      noticia: new FormControl('', [Validators.required]),
+      fecha: new FormControl('', [Validators.required])
+    }, []);
   }
 
-  ngOnInit(){
-    let response=this.postsService.getAll();
-    this.misPosts=response;
-    
+  ngOnInit() {
+    let response = this.postsService.getAll();
+    this.misPosts = response;
+
   }
 
-  cargarDatos():void{
+  get titulo() {
+    return this.miFormulario.get('titulo');
+  }
+
+  get imagen() {
+    return this.miFormulario.get('imagen');
+  }
+
+  get noticia() {
+    return this.miFormulario.get('noticia');
+  }
+
+  get fecha() {
+    return this.miFormulario.get('fecha');
+  }
+
+  cargarDatos(): void {
     let insertar;
-    if(this.miFormulario.valid){
-      insertar=this.postsService.insert(this.miFormulario.value);
+    if (this.miFormulario.valid) {
+      insertar = this.postsService.insert(this.miFormulario.value);
     }
     console.log(insertar);
     this.miFormulario.reset();
 
-    if(insertar){
-      this.insertado=true;
-      setTimeout(()=>{
-        this.insertado=false;
+    if (insertar) {
+      this.insertado = true;
+      setTimeout(() => {
+        this.insertado = false;
         this.cd.markForCheck();
-      },3000);
+      }, 3000);
     }
 
   }
