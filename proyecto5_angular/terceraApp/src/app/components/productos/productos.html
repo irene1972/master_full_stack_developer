@@ -1,0 +1,5 @@
+<ul>
+@for(producto of productos; track producto.url){
+    <li>{{producto.nombre}} <a [routerLink]="['/producto',producto.url]">Ver detalle</a></li>
+}
+</ul>
