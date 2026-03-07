@@ -1,0 +1,6 @@
+<section class="contenedor">
+    <h1>Productos:</h1>
+    @for(producto of productos;track producto.id){
+    <app-producto [miProducto]="producto"></app-producto>
+    }
+</section>
