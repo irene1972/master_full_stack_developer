@@ -10,22 +10,22 @@ POST http://localhost:3000/api/autores
 Content-Type: application/json
 
 {
-    "nombre":"Autor7",
-    "email":"autor7@autor7.com",
-    "imagen":"imagen7.jpeg"
+    "nombre":"Autor8",
+    "email":"autor7@autor8.com",
+    "imagen":"imagen8.jpeg"
 }
 
 ###
 
-PUT http://localhost:3000/api/autores/5
+PUT http://localhost:3000/api/autores/9
 Content-Type: application/json
 
 {
-    "nombre":"Autor5_",
-    "email":"autor5@autor5_.com",
-    "imagen":"imagen5_.jpeg"
+    "nombre":"Autor9_2",
+    "email":"autor5@autor9_2.com",
+    "imagen":"imagen9_2.jpeg"
 }
 
 ###
 
-DELETE http://localhost:3000/api/autores/6
+DELETE http://localhost:3000/api/autores/9

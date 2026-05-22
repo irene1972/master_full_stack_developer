@@ -107,31 +107,27 @@ Example of API calls:
 ```http
 GET http://localhost:3000/api/autores
 
-
 GET http://localhost:3000/api/autores/getById/2
-
 
 POST http://localhost:3000/api/autores
 Content-Type: application/json
 
 {
-    "nombre":"Autor3",
-    "email":"autor3@autor3.com",
-    "imagen":"imagen3.jpeg"
+    "nombre":"Autor8",
+    "email":"autor7@autor8.com",
+    "imagen":"imagen8.jpeg"
 }
 
-
-PUT http://localhost:3000/api/autores/3
+PUT http://localhost:3000/api/autores/9
 Content-Type: application/json
 
 {
-    "nombre":"Autor3_",
-    "email":"autor3@autor3_.com",
-    "imagen":"imagen3.jpeg"
+    "nombre":"Autor9_2",
+    "email":"autor5@autor9_2.com",
+    "imagen":"imagen9_2.jpeg"
 }
 
-
-DELETE http://localhost:3000/api/autores/3
+DELETE http://localhost:3000/api/autores/9
 
 ```
 
@@ -140,37 +136,32 @@ DELETE http://localhost:3000/api/autores/3
 ```http
 GET http://localhost:3000/api/posts
 
-
-GET http://localhost:3000/api/posts/getById/4
-
+GET http://localhost:3000/api/posts/getById/10
 
 GET http://localhost:3000/api/posts/autor/2
-
 
 POST http://localhost:3000/api/posts
 Content-Type: application/json
 
 {
-    "titulo": "Los peces",
-    "descripcion": "Reprehenderit alias deserunt fugiat ipsum, quo dolorem post.",
+    "titulo": "Los lobos",
+    "descripcion": "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
     "fecha_creacion": "2025-12-07",
-    "categoria": "Animales",
+    "categoria": 1,
     "autores_id": 2
 }
 
-
-PUT http://localhost:3000/api/posts/2
+PUT http://localhost:3000/api/posts/10
 Content-Type: application/json
 
 {
-    "titulo": "Los peces",
-    "descripcion": "Reprehenderit alias deserunt fugiat ipsum, quo dolorem post.",
+    "titulo": "Las aves_2",
+    "descripcion": "Reprehenderit_2 alias deserunt fugiat ipsum, quo dolorem post_.",
     "fecha_creacion": "2025-12-10",
-    "categoria": "Animales",
-    "autores_id": 2
+    "categoria": 1,
+    "autores_id": 1
 }
 
-
-DELETE http://localhost:3000/api/posts/3
+DELETE http://localhost:3000/api/posts/10
 
 ```

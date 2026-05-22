@@ -1,0 +1,37 @@
+GET http://localhost:3000/api/clientes
+
+###
+GET http://localhost:3000/api/clientes/pikachu
+
+###
+POST http://localhost:3000/api/clientes
+Content-Type: application/json
+
+{
+    "direccion": "123",
+    "email": "a@com",
+    "edad": 121,
+    "genero": "o",
+    "cuota": 9.90,
+    "fecha_nacimiento": "1987-09-23",
+    "dni": "88888888Y"
+}
+
+###
+PUT http://localhost:3000/api/clientes/29
+Content-Type: application/json
+
+{
+    "nombre": "Mario",
+    "apellidos": "Romero",
+    "direccion": "Calle Falsa 123",
+    "email": "mario1@student.com",
+    "edad": 42,
+    "genero": "F",
+    "cuota": 19.90,
+    "fecha_nacimiento": "1987-09-23",
+    "dni": "8888884Y"
+}
+
+###
+DELETE http://localhost:3000/api/clientes/30

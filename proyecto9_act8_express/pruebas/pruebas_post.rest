@@ -2,7 +2,7 @@ GET http://localhost:3000/api/posts
 
 ###
 
-GET http://localhost:3000/api/posts/getById/6
+GET http://localhost:3000/api/posts/getById/10
 
 ###
 
@@ -17,23 +17,23 @@ Content-Type: application/json
     "titulo": "Los lobos",
     "descripcion": "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
     "fecha_creacion": "2025-12-07",
-    "categoria": "Animales",
+    "categoria": 1,
     "autores_id": 2
 }
 
 ###
 
-PUT http://localhost:3000/api/posts/4
+PUT http://localhost:3000/api/posts/10
 Content-Type: application/json
 
 {
-    "titulo": "Las aves",
-    "descripcion": "Reprehenderit alias deserunt fugiat ipsum, quo dolorem post_.",
+    "titulo": "Las aves_2",
+    "descripcion": "Reprehenderit_2 alias deserunt fugiat ipsum, quo dolorem post_.",
     "fecha_creacion": "2025-12-10",
-    "categoria": "Animales",
-    "autores_id": 2
+    "categoria": 1,
+    "autores_id": 1
 }
 
 ###
 
-DELETE http://localhost:3000/api/posts/4
+DELETE http://localhost:3000/api/posts/10

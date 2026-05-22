@@ -1,35 +1,43 @@
 const db=require('../config/db');
 
 const selectAll=async()=>{
-    const [result]=await db.query(`select 
+    const [result]=await db.query(`
+        select 
                                         p.id,
                                         p.titulo,
                                         p.descripcion,
                                         p.fecha_creacion,
-                                        p.categoria,
-                                        a.id as autorId,
-                                        a.nombre,
-                                        a.email,
-                                        a.imagen 
-                                    from posts p
-                                    inner join autores a on p.autores_id=a.id`);
-    return result;
-}
-
-const selectById=async(postId)=>{
-    const [result]=await db.query(`select 
-                                        p.id,
-                                        p.titulo,
-                                        p.descripcion,
-                                        p.fecha_creacion,
-                                        p.categoria,
+                                        p.categorias_id,
+                                        c.nombre as categoria,
                                         a.id as autorId,
                                         a.nombre,
                                         a.email,
                                         a.imagen 
                                     from posts p
                                     inner join autores a on p.autores_id=a.id
-                                    where p.id=?`,
+                                    inner join categorias c on c.id=p.categorias_id
+        `);
+    return result;
+}
+
+const selectById=async(postId)=>{
+    const [result]=await db.query(`
+        select 
+                                        p.id,
+                                        p.titulo,
+                                        p.descripcion,
+                                        p.fecha_creacion,
+                                        p.categorias_id,
+                                        c.nombre as categoria,
+                                        a.id as autorId,
+                                        a.nombre,
+                                        a.email,
+                                        a.imagen 
+                                    from posts p
+                                    inner join autores a on p.autores_id=a.id
+                                    inner join categorias c on c.id=p.categorias_id
+                                    where p.id=?
+                                    `,
                                     [postId]);
     if(result.length===0) return null;
     return result[0];
@@ -37,19 +45,23 @@ const selectById=async(postId)=>{
 
 const selectByAutor=async(autorId)=>{
     
-    const [result]=await db.query(`select 
+    const [result]=await db.query(`
+        select 
                                         p.id,
                                         p.titulo,
                                         p.descripcion,
                                         p.fecha_creacion,
-                                        p.categoria,
+                                        p.categorias_id,
+                                        c.nombre as categoria,
                                         a.id as autorId,
                                         a.nombre,
                                         a.email,
                                         a.imagen 
                                     from posts p
                                     inner join autores a on p.autores_id=a.id
-                                    where a.id=?`,
+                                    inner join categorias c on c.id=p.categorias_id
+                                    where a.id=?
+                                    `,
                                     [autorId]);
                 
     if(result.length===0) return null;
@@ -58,12 +70,12 @@ const selectByAutor=async(autorId)=>{
 }
 
 const insert=async({titulo,descripcion,fecha_creacion,categoria,autores_id})=>{
-    const [result]=await db.query('insert into posts (titulo,descripcion,fecha_creacion,categoria,autores_id) values (?,?,?,?,?)',[titulo,descripcion,fecha_creacion,categoria,autores_id]);
+    const [result]=await db.query('insert into posts (titulo,descripcion,fecha_creacion,categorias_id,autores_id) values (?,?,?,?,?)',[titulo,descripcion,fecha_creacion,categoria,autores_id]);
     return result;
 }
 
 const update=async(postId,{titulo,descripcion,fecha_creacion,categoria,autores_id})=>{
-    const [result]=await db.query('update posts set titulo=?,descripcion=?,fecha_creacion=?,categoria=?,autores_id=? where id=?',[titulo,descripcion,fecha_creacion,categoria,autores_id,postId]);
+    const [result]=await db.query('update posts set titulo=?,descripcion=?,fecha_creacion=?,categorias_id=?,autores_id=? where id=?',[titulo,descripcion,fecha_creacion,categoria,autores_id,postId]);
     return result;
 }
 
